@@ -15,18 +15,22 @@ public class MapGen : MonoBehaviour {
     public List<Vector3> takenPositions = new List<Vector3>();
 
     //paramenters for rooms and 'grid' size
-    public int gridSizeX, gridSizeZ, numRooms = 12;
+    int gridSizeX, gridSizeZ, numRooms = 12;
 
     //the room we will spawn
-    public GameObject[] roomTypes = new GameObject[3];
+    public GameObject[] roomTypes;
 
     //has the bossRoom spawned
     public bool isBossRoom = false;
 
     public int treasureRoomCount = 0;
 
+    //Player reference to activate player when map is generated
+    public GameObject player;
+    public PlayerSpawn playerSpawn;
 
-    private void Start()
+
+    void Awake()
     {
         //check to see if numRooms will exceed size of grid
         if(numRooms >= (mapSizeTotal.x * 2) * (mapSizeTotal.z * 2))
@@ -36,11 +40,15 @@ public class MapGen : MonoBehaviour {
         //set grid sizes to mapSizeTotals x and z values
         gridSizeX = Mathf.RoundToInt(mapSizeTotal.x);
         gridSizeZ = Mathf.RoundToInt(mapSizeTotal.z);
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerSpawn = player.GetComponent<PlayerSpawn>();
         CreateRooms();
         SetRoomDoors();
         FindBossRoom();
         CreateMiscRooms();
         CreateMap();
+        //spawn the player to start room
+        playerSpawn.SpawnPlayer();
         Debug.Log(rooms.Length);
     }
 
@@ -264,8 +272,9 @@ public class MapGen : MonoBehaviour {
                 continue;
             }
             Vector3 roomPos = room.roomPos;
-            roomPos.x *= 10;
-            roomPos.z *= 10;
+            //needs to be room dimensions (estimates)
+            roomPos.x *= 24;
+            roomPos.z *= 14;
             /*
             GameObject roomCurrent = Object.Instantiate(whiteRoom, roomPos, Quaternion.identity);
             Transform doorParent = roomCurrent.transform.FindChild("Walls");
@@ -299,7 +308,7 @@ public class MapGen : MonoBehaviour {
             float dist = Vector3.Distance(Vector3.zero, roomPos);
             if(dist > maxDist)
             {
-                if (!(NumberOfAdjacentRooms(roomPos, takenPositions) > 1))
+                if (!(NumberOfAdjacentRooms(roomPos, takenPositions) > 1) && isBossRoom == false)
                 {
                     maxDist = dist;
                     bossRoom = room;
@@ -311,7 +320,7 @@ public class MapGen : MonoBehaviour {
 
         if (bossRoom != null)
         {
-            bossRoom.type = 3;
+            bossRoom.type = 4;
             isBossRoom = true;
         }
         
@@ -332,13 +341,13 @@ public class MapGen : MonoBehaviour {
             if (NumberOfAdjacentRooms(pos, takenPositions) == 1)
             {
                 //if not boss room or starting room
-                if (room.type != 3 && room.type != 0)
+                if (room.type != 4 && room.type != 0)
                 {
                     possibleRooms.Add(room);
                     bool makeRoom = (Random.value > 0.7f);
                     if (makeRoom && treasureRoomCount < 2)
                     {
-                        room.type = 4;
+                        room.type = 3;
                         treasureRoomCount++;
                     }
                 }
@@ -348,7 +357,7 @@ public class MapGen : MonoBehaviour {
         if(treasureRoomCount == 0)
         {
             int listIndex = Mathf.RoundToInt(Random.Range(0, (possibleRooms.Count - 1)));
-            possibleRooms[listIndex].type = 4;
+            possibleRooms[listIndex].type = 3;
             Debug.Log("Manual Treasure Room");
         }
     }

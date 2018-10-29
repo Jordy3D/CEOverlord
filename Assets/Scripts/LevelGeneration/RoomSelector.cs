@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomSelector : MonoBehaviour {
+public class RoomSelector : MonoBehaviour
+{
 
     public bool up, down, left, right;
 
     public int type;
 
-    public GameObject wallUp, wallDown, wallLeft, wallRight;
+    //all doors disabled by default
+    public GameObject doorUp, doorDown, doorLeft, doorRight;
 
     private void Start()
     {
+        doorDown.SetActive(false);
+        doorUp.SetActive(false);
+        doorLeft.SetActive(false);
+        doorRight.SetActive(false);
         SetDoor();
     }
 
@@ -19,20 +25,20 @@ public class RoomSelector : MonoBehaviour {
     {
         if (up)
         {
-            wallUp.SetActive(false);
+            doorUp.SetActive(true);
         }
         if (down)
         {
-            wallDown.SetActive(false);
+            doorDown.SetActive(true);
         }
         if (left)
         {
-            wallLeft.SetActive(false);
+            doorLeft.SetActive(true);
         }
         if (right)
         {
-            wallRight.SetActive(false);
+            doorRight.SetActive(true);
         }
-        
+
     }
 }
