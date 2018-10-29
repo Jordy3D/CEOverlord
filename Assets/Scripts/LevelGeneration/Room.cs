@@ -13,6 +13,8 @@ public class Room {
     //bool denoting which doors need to be made
     public bool doorTop, doorBot, doorLeft, doorRight;
 
+    
+
     //constructor to easily create rooms
     public Room(Vector3 _roomPos, int _type)
     {

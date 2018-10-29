@@ -12,13 +12,21 @@ public class RoomSelector : MonoBehaviour
     //all doors disabled by default
     public GameObject doorUp, doorDown, doorLeft, doorRight;
 
+    //all teleport points
+    public GameObject doorTPU, doorTPD, doorTPL, doorTPR;
+
+    //original grid position of room
+    public Vector3 gridPos;
+
     private void Start()
     {
         doorDown.SetActive(false);
         doorUp.SetActive(false);
         doorLeft.SetActive(false);
         doorRight.SetActive(false);
+        
         SetDoor();
+
     }
 
     public void SetDoor()

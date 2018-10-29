@@ -14,6 +14,10 @@ public class MapGen : MonoBehaviour {
     //list of positions that have been taken so no double ups occur
     public List<Vector3> takenPositions = new List<Vector3>();
 
+    //list of actual rooms with RoomSelector
+    Dictionary<Vector3, RoomSelector> realRooms = new Dictionary<Vector3, RoomSelector>();
+    List<RoomSelector> realRoomsList = new List<RoomSelector>();
+
     //paramenters for rooms and 'grid' size
     int gridSizeX, gridSizeZ, numRooms = 12;
 
@@ -47,6 +51,7 @@ public class MapGen : MonoBehaviour {
         FindBossRoom();
         CreateMiscRooms();
         CreateMap();
+        FindTeleportPoint();
         //spawn the player to start room
         playerSpawn.SpawnPlayer();
         Debug.Log(rooms.Length);
@@ -149,6 +154,7 @@ public class MapGen : MonoBehaviour {
     //gets the number of rooms next to a given pos
     public int NumberOfAdjacentRooms(Vector3 pos, List<Vector3> usedPositions)
     {
+        
         int returnedVal = 0;
         if(usedPositions.Contains( pos + Vector3.right)){
             returnedVal++;
@@ -224,6 +230,7 @@ public class MapGen : MonoBehaviour {
                     continue;
                 }
                 Vector3 gridPos = new Vector3(x, 0, z);
+              
 
                 if(z-1 < 0)//check above
                 {
@@ -273,22 +280,18 @@ public class MapGen : MonoBehaviour {
             }
             Vector3 roomPos = room.roomPos;
             //needs to be room dimensions (estimates)
-            roomPos.x *= 24;
-            roomPos.z *= 14;
-            /*
-            GameObject roomCurrent = Object.Instantiate(whiteRoom, roomPos, Quaternion.identity);
-            Transform doorParent = roomCurrent.transform.FindChild("Walls");
-            doorParent.FindChild("WallUp").gameObject.SetActive(!room.doorTop);
-            doorParent.FindChild("WallDown").gameObject.SetActive(!room.doorBot);
-            doorParent.FindChild("WallLeft").gameObject.SetActive(!room.doorLeft);
-            doorParent.FindChild("WallRight").gameObject.SetActive(!room.doorRight);
-            */
+            roomPos.x *= 26;
+            roomPos.z *= 16;
+            
             RoomSelector roomCurrent = Object.Instantiate(roomTypes[room.type], roomPos, Quaternion.identity).GetComponent<RoomSelector>();
+            roomCurrent.gridPos = room.roomPos;
             roomCurrent.up = room.doorTop;
             roomCurrent.down = room.doorBot;
             roomCurrent.left = room.doorLeft;
             roomCurrent.right = room.doorRight;
             roomCurrent.type = room.type;
+            realRooms.Add(roomCurrent.gridPos, roomCurrent);
+            realRoomsList.Add(roomCurrent);
 
         }
     }
@@ -359,6 +362,61 @@ public class MapGen : MonoBehaviour {
             int listIndex = Mathf.RoundToInt(Random.Range(0, (possibleRooms.Count - 1)));
             possibleRooms[listIndex].type = 3;
             Debug.Log("Manual Treasure Room");
+        }
+    }
+
+
+    //finds teleport point of room using int to represent direction
+    public void FindTeleportPoint()
+    {
+
+        foreach (RoomSelector room in realRoomsList)
+        {
+            if (room.up)
+            {
+                //check if there is in fact a room above
+                if (realRooms.ContainsKey(room.gridPos + Vector3.forward))
+                {
+                    RoomSelector upRoom = realRooms[room.gridPos + Vector3.forward];
+                    DoorTeleport doorTP = room.doorUp.GetComponent<DoorTeleport>();
+                    //set doors teleport position to the teleport point opposite in next room
+                    doorTP.destination = upRoom.doorTPD.transform;
+                }
+            }
+
+            if (room.down)
+            {
+                if (realRooms.ContainsKey(room.gridPos + Vector3.back))
+                {
+                    RoomSelector downRoom = realRooms[room.gridPos + Vector3.back];
+                    DoorTeleport doorTP = room.doorDown.GetComponent<DoorTeleport>();
+                    //set doors teleport position to the teleport point opposite in next room
+                    doorTP.destination = downRoom.doorTPU.transform;
+                }
+            }
+
+            if (room.left)
+            {
+                if (realRooms.ContainsKey(room.gridPos + Vector3.left))
+                {
+                    RoomSelector leftRoom = realRooms[room.gridPos + Vector3.left];
+                    DoorTeleport doorTP = room.doorLeft.GetComponent<DoorTeleport>();
+                    //set doors teleport position to the teleport point opposite in next room
+                    doorTP.destination = leftRoom.doorTPR.transform;
+                }
+            }
+
+            if (room.right)
+            {
+                if (realRooms.ContainsKey(room.gridPos + Vector3.right))
+                {
+                    RoomSelector rightRoom = realRooms[room.gridPos + Vector3.right];
+                    DoorTeleport doorTP = room.doorRight.GetComponent<DoorTeleport>();
+                    //set doors teleport position to the teleport point opposite in next room
+                    doorTP.destination = rightRoom.doorTPL.transform;
+                }
+            }
+
         }
     }
 

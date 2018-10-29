@@ -6,6 +6,7 @@ public class UpdateCamera : MonoBehaviour
 {
     public GameObject camera;
     public Transform cameraPoint;
+    
     // Use this for initialization
     void Start()
     {
@@ -16,7 +17,7 @@ public class UpdateCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -24,6 +25,7 @@ public class UpdateCamera : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             camera.transform.position = cameraPoint.position;
+
         }
     }
 }
