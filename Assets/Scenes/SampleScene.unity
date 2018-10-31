@@ -393,6 +393,10 @@ Prefab:
       propertyPath: itemID
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1065040292695412, guid: 52be12a6ccd53b045ab9e0babb5d7785, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52be12a6ccd53b045ab9e0babb5d7785, type: 2}
   m_IsPrefabAsset: 0
@@ -939,6 +943,10 @@ Prefab:
         type: 2}
       propertyPath: itemID
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1273185772931840, guid: aa48e098c7e81ed4981c11c9ba586148, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa48e098c7e81ed4981c11c9ba586148, type: 2}
