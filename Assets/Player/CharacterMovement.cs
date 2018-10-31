@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     public float attackRange;
 
     PlayerStats stats;
+    DisplayStats display;
 
     public void Start()
     {
@@ -25,6 +26,8 @@ public class CharacterMovement : MonoBehaviour
         //main camera is equal to the camera in the scene
 
         stats = GetComponent<PlayerStats>();
+
+        display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
 
         UpdateStats();
     }
@@ -56,5 +59,7 @@ public class CharacterMovement : MonoBehaviour
         damage = stats.damage;
         attackSpeed = stats.attackSpeed;
         attackRange = stats.attackRange;
+
+        display.UpdateDisplay();
     }
 }
