@@ -55,9 +55,13 @@ public class MapGen : MonoBehaviour
         CreateMiscRooms();
         CreateMap();
         FindTeleportPoint();
+        Debug.Log(rooms.Length);
+    }
+
+    private void Start()
+    {
         //spawn the player to start room
         playerSpawn.SpawnPlayer();
-        Debug.Log(rooms.Length);
     }
 
     public void CreateRooms()
