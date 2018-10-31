@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGen : MonoBehaviour {
+public class MapGen : MonoBehaviour
+{
 
     //how big is the world? using room lengths as units
 
@@ -19,7 +20,9 @@ public class MapGen : MonoBehaviour {
     List<RoomSelector> realRoomsList = new List<RoomSelector>();
 
     //paramenters for rooms and 'grid' size
-    int gridSizeX, gridSizeZ, numRooms = 12;
+    int gridSizeX, gridSizeZ;
+
+    public int numRooms = 20;
 
     //the room we will spawn
     public GameObject[] roomTypes;
@@ -37,7 +40,7 @@ public class MapGen : MonoBehaviour {
     void Awake()
     {
         //check to see if numRooms will exceed size of grid
-        if(numRooms >= (mapSizeTotal.x * 2) * (mapSizeTotal.z * 2))
+        if (numRooms >= (mapSizeTotal.x * 2) * (mapSizeTotal.z * 2))
         {
             numRooms = Mathf.RoundToInt((mapSizeTotal.x * 2) * (mapSizeTotal.z * 2));
         }
@@ -64,7 +67,7 @@ public class MapGen : MonoBehaviour {
         //PLACE STARTING ROOM NEAR CENTRE OF GRID TO ENSURE MAX SPREAD. room type 1 for starting room
         rooms[gridSizeX, gridSizeZ] = new Room(Vector3.zero, 0);
         //add the starting room to list of taken room positions
-        takenPositions.Insert(0,Vector3.zero);
+        takenPositions.Insert(0, Vector3.zero);
         //use position to make checks later
         Vector3 checkPos = Vector3.zero;
 
@@ -72,43 +75,43 @@ public class MapGen : MonoBehaviour {
         float randomCompare = 0.2f, randCompStart = 0.2f, randCompFin = 0.01f;
         //add in rooms
         //for loop runs once for each room we wish to create
-        for(int i = 0; i < numRooms - 1; i++)
+        for (int i = 0; i < numRooms - 1; i++)
         {
             //add comment after figure out what this does
             float randomVal = ((float)i / ((float)numRooms - 1));
             randomCompare = Mathf.Lerp(randCompStart, randCompFin, randomVal);
             Debug.Log(randomCompare);
-            
+
             //grab a new position using method
             checkPos = NewPosition();
 
             //test new position. If statement here uses values above to have dungeon branch less as it creates more rooms
 
-            
-            if(NumberOfAdjacentRooms(checkPos, takenPositions) > 1 && Random.value > randomCompare)
+
+            if (NumberOfAdjacentRooms(checkPos, takenPositions) > 1 && Random.value > randomCompare)
             {
                 int iterations = 0;
 
-                while(NumberOfAdjacentRooms(checkPos, takenPositions) > 1 && iterations < 100)
+                while (NumberOfAdjacentRooms(checkPos, takenPositions) > 1 && iterations < 100)
                 {
                     //find new positions where only 1 neighbour exits
                     checkPos = SelectiveNewPosition();
                     iterations++;
 
                 }
-                if(iterations >= 50)
+                if (iterations >= 50)
                 {
                     Debug.Log("Couldnt create with fewer neighbours than :" + NumberOfAdjacentRooms(checkPos, takenPositions));
                 }
-                
+
             }
-            
+
 
             //finalize position
             //create a new room at check pos, adding it to the 2d array with offset 
             int roomType = Mathf.RoundToInt(Random.Range(1f, 2f));
             rooms[(int)checkPos.x + gridSizeX, (int)checkPos.z + gridSizeZ] = new Room(checkPos, roomType);
-            takenPositions.Insert(0,checkPos);
+            takenPositions.Insert(0, checkPos);
         }
 
 
@@ -118,7 +121,7 @@ public class MapGen : MonoBehaviour {
     {
         int x = 0, z = 0;
         Vector3 checkingPos = Vector3.zero;
-        while(takenPositions.Contains(checkingPos) || x >= gridSizeX || x< -gridSizeX || z >= gridSizeZ || z < -gridSizeZ)
+        while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || z >= gridSizeZ || z < -gridSizeZ)
         {
             //grab a taken position at random to move up,down,left or right from 
             int index = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
@@ -131,16 +134,19 @@ public class MapGen : MonoBehaviour {
                 if (positive)
                 {
                     z += 1;
-                } else
+                }
+                else
                 {
                     z -= 1;
                 }
-            } else
+            }
+            else
             {
                 if (positive)
                 {
                     x += 1;
-                } else
+                }
+                else
                 {
                     x -= 1;
                 }
@@ -154,24 +160,28 @@ public class MapGen : MonoBehaviour {
     //gets the number of rooms next to a given pos
     public int NumberOfAdjacentRooms(Vector3 pos, List<Vector3> usedPositions)
     {
-        
+
         int returnedVal = 0;
-        if(usedPositions.Contains( pos + Vector3.right)){
+        if (usedPositions.Contains(pos + Vector3.right))
+        {
             returnedVal++;
         }
-        if (usedPositions.Contains(pos + Vector3.left)){
+        if (usedPositions.Contains(pos + Vector3.left))
+        {
             returnedVal++;
         }
-        if (usedPositions.Contains(pos + Vector3.forward)){
+        if (usedPositions.Contains(pos + Vector3.forward))
+        {
             returnedVal++;
         }
-        if (usedPositions.Contains(pos + Vector3.back)){
+        if (usedPositions.Contains(pos + Vector3.back))
+        {
             returnedVal++;
         }
         return returnedVal;
 
     }
-    
+
     //getting room that only has 1 neighbour. adds to branching effect when required
     public Vector3 SelectiveNewPosition()
     {
@@ -221,7 +231,7 @@ public class MapGen : MonoBehaviour {
     void SetRoomDoors()
     {
         //loop through the grid
-        for(int x = 0; x< gridSizeX * 2; x++)
+        for (int x = 0; x < gridSizeX * 2; x++)
         {
             for (int z = 0; z < gridSizeZ * 2; z++)
             {
@@ -230,12 +240,13 @@ public class MapGen : MonoBehaviour {
                     continue;
                 }
                 Vector3 gridPos = new Vector3(x, 0, z);
-              
 
-                if(z-1 < 0)//check above
+
+                if (z - 1 < 0)//check above
                 {
                     rooms[x, z].doorBot = false;
-                } else
+                }
+                else
                 {
                     rooms[x, z].doorBot = (rooms[x, z - 1] != null);
                 }
@@ -272,9 +283,9 @@ public class MapGen : MonoBehaviour {
 
     void CreateMap()
     {
-        foreach(Room room in rooms)
+        foreach (Room room in rooms)
         {
-            if(room == null)
+            if (room == null)
             {
                 continue;
             }
@@ -282,7 +293,7 @@ public class MapGen : MonoBehaviour {
             //needs to be room dimensions (estimates)
             roomPos.x *= 26;
             roomPos.z *= 16;
-            
+
             RoomSelector roomCurrent = Object.Instantiate(roomTypes[room.type], roomPos, Quaternion.identity).GetComponent<RoomSelector>();
             roomCurrent.gridPos = room.roomPos;
             roomCurrent.up = room.doorTop;
@@ -301,15 +312,15 @@ public class MapGen : MonoBehaviour {
         Room bossRoom = null;
         float maxDist = 0f;
 
-            foreach (Room room in rooms)
+        foreach (Room room in rooms)
+        {
+            if (room == null)
             {
-                if (room == null)
-                {
-                    continue;
-                }
-                Vector3 roomPos = room.roomPos;
+                continue;
+            }
+            Vector3 roomPos = room.roomPos;
             float dist = Vector3.Distance(Vector3.zero, roomPos);
-            if(dist > maxDist)
+            if (dist > maxDist)
             {
                 if (!(NumberOfAdjacentRooms(roomPos, takenPositions) > 1) && isBossRoom == false)
                 {
@@ -319,14 +330,14 @@ public class MapGen : MonoBehaviour {
             }
 
 
-            }
+        }
 
         if (bossRoom != null)
         {
             bossRoom.type = 4;
             isBossRoom = true;
         }
-        
+
     }
 
     void CreateMiscRooms()
@@ -334,9 +345,9 @@ public class MapGen : MonoBehaviour {
 
         //create a list of rooms that fit criteria incase we do not randomly generate one
         List<Room> possibleRooms = new List<Room>();
-        foreach(Room room in rooms)
+        foreach (Room room in rooms)
         {
-            if(room == null)
+            if (room == null)
             {
                 continue;
             }
@@ -357,7 +368,7 @@ public class MapGen : MonoBehaviour {
             }
         }
 
-        if(treasureRoomCount == 0)
+        if (treasureRoomCount == 0)
         {
             int listIndex = Mathf.RoundToInt(Random.Range(0, (possibleRooms.Count - 1)));
             possibleRooms[listIndex].type = 3;
@@ -420,5 +431,5 @@ public class MapGen : MonoBehaviour {
         }
     }
 
-  
+
 }
