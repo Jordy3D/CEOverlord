@@ -15,7 +15,7 @@ public abstract class Glove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+       
     }
 
     // Update is called once per frame
