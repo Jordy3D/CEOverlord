@@ -23,7 +23,6 @@ public class ItemPickup : MonoBehaviour
         playerInv = playerObject.GetComponent<Inventory>();
         stats = playerObject.GetComponent<PlayerStats>();
 
-
         text = GetComponentInChildren<TextMesh>();
 
         itemName = ItemData.CreateItem(itemID).Name;

@@ -11,14 +11,16 @@ public class PlayerAttack : MonoBehaviour
     //where we are in the combo
     public int comboPos = 0;
     public bool isCombo;
+
+    public Glove thingGloves;
     
     #endregion
     // Use this for initialization
     void Start()
     {
         playerGlove = transform.GetChild(0).GetComponent<Glove>();
-        
 
+        thingGloves = null;
     }
 
     // Update is called once per frame

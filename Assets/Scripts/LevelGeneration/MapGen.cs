@@ -84,7 +84,7 @@ public class MapGen : MonoBehaviour
             //add comment after figure out what this does
             float randomVal = ((float)i / ((float)numRooms - 1));
             randomCompare = Mathf.Lerp(randCompStart, randCompFin, randomVal);
-            Debug.Log(randomCompare);
+            //Debug.Log(randomCompare);
 
             //grab a new position using method
             checkPos = NewPosition();

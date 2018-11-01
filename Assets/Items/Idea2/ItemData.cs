@@ -49,7 +49,7 @@ public static class ItemData
 
                 icon = "Paopu_Icon";
                 mesh = "Paopu_Mesh";
-                break; 
+                break;
             #endregion
             case 2:
                 #region Gummi
@@ -182,7 +182,7 @@ public static class ItemData
                 mesh = "Tie_Mesh";
                 break;
             #endregion
-
+            
             #endregion
 
             default:
@@ -200,6 +200,7 @@ public static class ItemData
                 mesh = "Angery_Mesh";
                 break;
                 #endregion
+
         }
 
         //Item temp = new Item();
@@ -217,6 +218,70 @@ public static class ItemData
             Health = health,
 
             Icon = Resources.Load("Icons/" + icon) as Texture2D,
+            Mesh = mesh
+        };
+
+        return temp;
+    }
+
+    public static Item CreateGlove(int ItemID)
+    {
+        GameObject gloveHolder = GameObject.Find("GloveHolder");
+
+        int id = ItemID;
+        string name = "";
+        string description = "";
+
+        ItemType type = ItemType.Glove;
+
+        string icon = "";
+        string mesh = "";
+
+        switch (ItemID)
+        {
+            #region Gloves 0-99
+            case 0:
+                #region Default Gloves
+                name = "Old Gloves";
+                description = "Fits like one";
+
+                type = ItemType.Consumable;
+                
+                icon = "Apple_Icon";
+                mesh = "Apple_Mesh";
+                //gloveHolder.AddComponent("BasicGlove");
+                gloveHolder.AddComponent<BasicGlove>();
+
+                break;
+            #endregion
+            case 1:
+                #region Default Gloves
+                name = "Lead Gloves";
+                description = "Heavy Metal!";
+
+                type = ItemType.Consumable;
+
+                icon = "Apple_Icon";
+                mesh = "Apple_Mesh";
+                //gloveHolder.AddComponent("BasicGlove");
+                gloveHolder.AddComponent<LeadGlove>();
+
+                break;
+            #endregion
+            #endregion
+            default:
+                break;
+        }
+
+        Item temp = new Item
+        {
+            ID = ItemID,
+            Name = name,
+            Description = description,
+
+            Type = type,
+                        
+            //Icon = Resources.Load("Icons/" + icon) as Texture2D,
             Mesh = mesh
         };
 

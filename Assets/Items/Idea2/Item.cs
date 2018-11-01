@@ -154,5 +154,6 @@ public enum ItemType
     Weapon,
     Money,
     Quest,
-    Miscellaneous
+    Miscellaneous,
+    Glove
 }
