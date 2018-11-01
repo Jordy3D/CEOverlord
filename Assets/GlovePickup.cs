@@ -62,7 +62,7 @@ namespace CEOverlord
                 playerGlove.thingGloves = holder.gloves[itemID];
 
                 Destroy(gloveContainer.GetComponent<Glove>());
-                gloveContainer.AddComponent<Glove>();
+                //gloveContainer.AddComponent<Glove>();
 
                 Destroy(gameObject);
             }

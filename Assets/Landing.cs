@@ -12,6 +12,8 @@ public class Landing : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+
         shake = GetComponent<TriggerShake>();
         explosion = this.gameObject;
     }
@@ -25,7 +27,7 @@ public class Landing : MonoBehaviour
     public void OnLand()
     {
         shake.cameraShake = cameraShake;
-        //shake.explosion = explosionEffect;
+        shake.explosion = explosion;
         shake.StartShake(shake.shakeDuration, shake.shakeForce);
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraPoint
   - PlayerSpawn
+  - Elevator
   layers:
   - Default
   - TransparentFX
