@@ -10,7 +10,8 @@ public class PlayerAttack : MonoBehaviour
     public float time = 0;
     //where we are in the combo
     public int comboPos = 0;
-    public bool isCombo;
+    public bool isCombo, isCoolDown;
+    public float coolDownLimit, comboTimeLimit;
 
     public Glove thingGloves;
     
@@ -24,16 +25,55 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // Update is called once per frame
+
+        //adjust later to only allow for hits past certain points in animation
     void Update()
     {
+        if (isCoolDown)
+        {
+            time += Time.deltaTime;
+            if(time >= coolDownLimit)
+            {
+                isCoolDown = false;
+                time = 0;
+                Debug.Log("Cool down finished");
+            }
+        }
         if (isCombo)
         {
             time += Time.deltaTime;
+            if(time >= comboTimeLimit)
+            {
+                isCombo = false;
+                comboPos = 0;
+                Debug.Log("Combo Dropped");
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-          
+            if(comboPos < comboLimit && !isCoolDown)
+            {
+                if (comboPos == 0)
+                {
+                    isCombo = true;
+                    time = 0;
+                    Debug.Log("Combo started");
+                }
+                playerGlove.Attack();
+                comboPos++;
+                if(comboPos == comboLimit)
+                {
+                    isCombo = false;
+                    isCoolDown = true;
+                    time = 0;
+                    comboPos = 0;
+                    Debug.Log("Combo Finished");
+                } else
+                {
+                    time = 0;
+                }
+            }
         }
     }
 }

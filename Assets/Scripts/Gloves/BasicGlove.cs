@@ -7,6 +7,7 @@ public class BasicGlove : Glove
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         comboLimit = 3;
         player.comboLimit = comboLimit;
     }

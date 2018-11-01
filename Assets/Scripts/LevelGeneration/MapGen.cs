@@ -5,9 +5,11 @@ using UnityEngine;
 public class MapGen : MonoBehaviour
 {
 
+    public int tries = 0;
+
     //how big is the world? using room lengths as units
 
-    Vector3 mapSizeTotal = new Vector3(6, 0, 6);
+    Vector3 mapSizeTotal;
 
     //2d array to hold rooms
     public Room[,] rooms;
@@ -28,7 +30,7 @@ public class MapGen : MonoBehaviour
     public GameObject[] roomTypes;
 
     //has the bossRoom spawned
-    public bool isBossRoom = false;
+    [HideInInspector]public bool isBossRoom = false;
 
     public int treasureRoomCount = 0;
 
@@ -36,9 +38,22 @@ public class MapGen : MonoBehaviour
     public GameObject player;
     public PlayerSpawn playerSpawn;
 
+    //bool to ensure map generation has been successful
+    public bool isGenerated;
+
+    float timeToGenerate = 0f;
 
     void Awake()
     {
+        if (numRooms<3)
+        {
+            numRooms = 3;
+        }
+
+        mapSizeTotal = new Vector3(numRooms *2, 0, numRooms*2);
+
+        timeToGenerate = 0f;
+
         //check to see if numRooms will exceed size of grid
         if (numRooms >= (mapSizeTotal.x * 2) * (mapSizeTotal.z * 2))
         {
@@ -49,13 +64,11 @@ public class MapGen : MonoBehaviour
         gridSizeZ = Mathf.RoundToInt(mapSizeTotal.z);
         player = GameObject.FindGameObjectWithTag("Player");
         playerSpawn = player.GetComponent<PlayerSpawn>();
-        CreateRooms();
-        SetRoomDoors();
-        FindBossRoom();
-        CreateMiscRooms();
+        SetUpMap();
         CreateMap();
         FindTeleportPoint();
-        Debug.Log(rooms.Length);
+       //Debug.Log(rooms.Length);
+        Debug.Log(Time.realtimeSinceStartup);
     }
 
     private void Start()
@@ -313,6 +326,9 @@ public class MapGen : MonoBehaviour
 
     void FindBossRoom()
     {
+
+        isBossRoom = false;
+
         Room bossRoom = null;
         float maxDist = 0f;
 
@@ -340,13 +356,21 @@ public class MapGen : MonoBehaviour
         {
             bossRoom.type = 4;
             isBossRoom = true;
+            
         }
 
+        //check if a boss room was made
+        if (isBossRoom == false)
+        {
+            isGenerated = false;
+        }
     }
 
     void CreateMiscRooms()
     {
 
+
+        bool madeTreasureRoom = false;
         //create a list of rooms that fit criteria incase we do not randomly generate one
         List<Room> possibleRooms = new List<Room>();
         foreach (Room room in rooms)
@@ -363,20 +387,44 @@ public class MapGen : MonoBehaviour
                 {
                     possibleRooms.Add(room);
                     bool makeRoom = (Random.value > 0.7f);
-                    if (makeRoom && treasureRoomCount < 2)
+
+                    //make treasure rooms based on total rooms
+                    if (makeRoom)
                     {
-                        room.type = 3;
-                        treasureRoomCount++;
+                        if (numRooms < 6 && treasureRoomCount < 1)
+                        {
+                            room.type = 3;
+                            treasureRoomCount++;
+                            madeTreasureRoom = true;
+                        }
+                        else if (numRooms >= 6 && treasureRoomCount < 2)
+                        {
+                            room.type = 3;
+                            treasureRoomCount++;
+                            madeTreasureRoom = true;
+                        }
                     }
+
                 }
             }
         }
 
         if (treasureRoomCount == 0)
         {
-            int listIndex = Mathf.RoundToInt(Random.Range(0, (possibleRooms.Count - 1)));
-            possibleRooms[listIndex].type = 3;
-            Debug.Log("Manual Treasure Room");
+            if (possibleRooms.Count != 0)
+            {
+                int listIndex = Mathf.RoundToInt(Random.Range(0, (possibleRooms.Count - 1)));
+                possibleRooms[listIndex].type = 3;
+                Debug.Log("Manual Treasure Room");
+                madeTreasureRoom = true;
+            }
+        }
+
+        //check to see if a treasure room was made
+        if (madeTreasureRoom == false)
+        {
+            //make it loop again
+            isGenerated = false;
         }
     }
 
@@ -435,5 +483,25 @@ public class MapGen : MonoBehaviour
         }
     }
 
+    void SetUpMap()
+    {
+        while (isGenerated == false)
+        {
+            
+            //redo generation
+            takenPositions = new List<Vector3>();
+            isGenerated = true;
+            CreateRooms();
+            SetRoomDoors();
+            FindBossRoom();
+            CreateMiscRooms();
+            tries++;
+        }
+       
+
+    }
+
+
+   
 
 }
