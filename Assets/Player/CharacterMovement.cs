@@ -27,11 +27,9 @@ public class CharacterMovement : MonoBehaviour
 
         stats = GetComponent<PlayerStats>();
 
-       
+        display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
 
         UpdateStats();
-
-        display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapGen : MonoBehaviour
 {
@@ -368,8 +369,6 @@ public class MapGen : MonoBehaviour
 
     void CreateMiscRooms()
     {
-
-
         bool madeTreasureRoom = false;
         //create a list of rooms that fit criteria incase we do not randomly generate one
         List<Room> possibleRooms = new List<Room>();
@@ -432,7 +431,6 @@ public class MapGen : MonoBehaviour
     //finds teleport point of room using int to represent direction
     public void FindTeleportPoint()
     {
-
         foreach (RoomSelector room in realRoomsList)
         {
             if (room.up)
@@ -479,15 +477,13 @@ public class MapGen : MonoBehaviour
                     doorTP.destination = rightRoom.doorTPL.transform;
                 }
             }
-
         }
     }
 
-    void SetUpMap()
+    public void SetUpMap()
     {
         while (isGenerated == false)
         {
-            
             //redo generation
             takenPositions = new List<Vector3>();
             isGenerated = true;
@@ -497,11 +493,10 @@ public class MapGen : MonoBehaviour
             CreateMiscRooms();
             tries++;
         }
-       
-
     }
 
-
-   
-
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
