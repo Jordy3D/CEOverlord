@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public int comboPos = 0;
     public bool isCombo, isCoolDown;
     public float coolDownLimit, comboTimeLimit;
+    CharacterMovement playerMove;
 
     public Glove thingGloves;
     
@@ -20,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerGlove = transform.GetChild(0).GetComponent<Glove>();
-
+        playerMove = GetComponent<CharacterMovement>();
         thingGloves = null;
     }
 
@@ -62,6 +63,10 @@ public class PlayerAttack : MonoBehaviour
                 }
                 playerGlove.Attack();
                 comboPos++;
+                CharacterMovement.stamina -= 5f;
+                CharacterMovement.canRegen = false;
+                playerMove.CallRegenStam();
+                
                 if(comboPos == comboLimit)
                 {
                     isCombo = false;

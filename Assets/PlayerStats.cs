@@ -9,6 +9,8 @@ public class PlayerStats : MonoBehaviour
     public float moveSpeed;
     public float damage;
     public float attackSpeed;
-    public float attackRange; 
+    public float attackRange;
+    public float stamina;
+    public float regenRate;
     #endregion
 }

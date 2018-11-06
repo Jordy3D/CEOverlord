@@ -8,14 +8,22 @@ public class CharacterMovement : MonoBehaviour
     public Rigidbody playerRB;
     //references the rigidbody for the player
 
-    public float health;
+    public static float health;
     public float moveSpeed;
     public float damage;
     public float attackSpeed;
     public float attackRange;
+    public static float stamina;
+    public static bool canRegen = true;
+    public float regenRate;
 
     PlayerStats stats;
     DisplayStats display;
+
+   
+    bool isCoRunning = false;
+    
+    
 
     public void Start()
     {
@@ -27,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
 
         stats = GetComponent<PlayerStats>();
 
-        display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
+        //display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
 
         UpdateStats();
     }
@@ -35,10 +43,35 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+       
+        if (canRegen)
+        {
+            Regen();
+            if (stamina > 100)
+            {
+                stamina = 100;
+            }
+        }
+
         float inputH = Input.GetAxis("Horizontal") * moveSpeed;
         float inputV = Input.GetAxis("Vertical") * moveSpeed;
+
+        
         Vector3 moveDir = new Vector3(inputH, 0f, inputV) * moveSpeed;
         Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
+        if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
+        {
+
+            playerRB.AddForce(force * 30f, ForceMode.Impulse);
+            stamina -= 20f;
+            if(stamina < 0)
+            {
+                stamina = 0;
+            }
+            canRegen = false;
+
+            CallRegenStam();
+        }
         playerRB.velocity = force;
     }
 
@@ -59,7 +92,33 @@ public class CharacterMovement : MonoBehaviour
         damage = stats.damage;
         attackSpeed = stats.attackSpeed;
         attackRange = stats.attackRange;
+        stamina = stats.stamina;
+        regenRate = stats.regenRate;
 
-        display.UpdateDisplay();
+        //display.UpdateDisplay();
+    }
+
+    public void Regen()
+    {
+        stamina += regenRate * Time.deltaTime;
+    }
+
+
+    public IEnumerator RegenStam()
+    {
+        isCoRunning = true;
+        yield return new WaitForSeconds(4f);
+        canRegen = true;
+        isCoRunning = false;
+    }
+
+    public void CallRegenStam()
+    {
+        if (isCoRunning)
+        {
+            StopCoroutine(RegenStam());
+            isCoRunning = false;
+        }
+        StartCoroutine(RegenStam());
     }
 }
