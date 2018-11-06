@@ -13,7 +13,7 @@ public class CharacterMovement : MonoBehaviour
     public float damage;
     public float attackSpeed;
     public float attackRange;
-    public static float stamina;
+    public float stamina;
     public static bool canRegen = true;
     public float regenRate;
 
@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
 
         stats = GetComponent<PlayerStats>();
 
-        //display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
+        display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
 
         UpdateStats();
     }
@@ -61,18 +61,28 @@ public class CharacterMovement : MonoBehaviour
         Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
         if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
         {
-
-            playerRB.AddForce(force * 30f, ForceMode.Impulse);
+            
+            playerRB.AddForce(force * 10f, ForceMode.Impulse);
             stamina -= 20f;
             if(stamina < 0)
             {
                 stamina = 0;
+                Debug.Log("Out of stamina");
             }
             canRegen = false;
 
             CallRegenStam();
         }
         playerRB.velocity = force;
+        if (playerRB.velocity != Vector3.zero)
+        {
+            playerRB.rotation = Quaternion.LookRotation(playerRB.velocity);
+        }
+        if (stamina < 0)
+        {
+            stamina = 0;
+            
+        }
     }
 
     void OnTriggerStay(Collider enemy)
@@ -95,7 +105,7 @@ public class CharacterMovement : MonoBehaviour
         stamina = stats.stamina;
         regenRate = stats.regenRate;
 
-        //display.UpdateDisplay();
+        display.UpdateDisplay();
     }
 
     public void Regen()
