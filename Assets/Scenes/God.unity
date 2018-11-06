@@ -1002,6 +1002,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1065040292695412, guid: 7c0a59c6dd8a92945adeec4567a4c8b0,
         type: 2}
+    - target: {fileID: 114140595488249380, guid: ea5da26395d88d748bde61f8f8f9cfbc,
+        type: 2}
+      propertyPath: seed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea5da26395d88d748bde61f8f8f9cfbc, type: 2}
   m_IsPrefabAsset: 0
@@ -1196,6 +1201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c071d6639f1b5408fda207b5e8c4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seed: 0
   tries: 0
   takenPositions: []
   numRooms: 7

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MapGen : MonoBehaviour
 {
+	public int seed = 0;
 
     public int tries = 0;
 
@@ -46,6 +47,11 @@ public class MapGen : MonoBehaviour
 
     void Awake()
     {
+        if (!(seed == 0))
+        {
+            Random.seed = seed;
+        }
+
         if (numRooms<3)
         {
             numRooms = 3;
