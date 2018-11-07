@@ -20,17 +20,10 @@ public class CharacterMovement : MonoBehaviour
     PlayerStats stats;
     DisplayStats display;
 
-
     bool isCoRunning = false;
-<<<<<<< HEAD
 
-
-=======
     public bool isDashing = false;
     
-    
->>>>>>> 2b51312849e1d1161e80e336601437341b718d0f
-
     public void Start()
     {
         //gets and attaches the rigidbody
@@ -65,22 +58,16 @@ public class CharacterMovement : MonoBehaviour
 
         Vector3 moveDir = new Vector3(inputH, 0f, inputV) * moveSpeed;
         Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
-<<<<<<< HEAD
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
-        {
-            playerRB.AddForce(force * 10f, ForceMode.Impulse);
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
+        //{
+        //    playerRB.AddForce(force * 10f, ForceMode.Impulse);
 
-            Vector3 newPosition = force * 10f;
-            // Use new position to lerp
+        //    Vector3 newPosition = force * 10f;
+        //    // Use new position to lerp
 
-=======
         if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0 && !isDashing)
         {
-
-
-            
->>>>>>> 2b51312849e1d1161e80e336601437341b718d0f
             stamina -= 20f;
             if (stamina < 0)
             {
@@ -142,8 +129,6 @@ public class CharacterMovement : MonoBehaviour
         canRegen = true;
         isCoRunning = false;
     }
-
-    
 
     public void CallRegenStam()
     {
