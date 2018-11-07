@@ -18,7 +18,23 @@ public class SpawnEnemies : MonoBehaviour
         spawnpoints = mommy.transform.Find("EnemySpawns").GetComponentsInChildren<Transform>();
     }
 
-    private void OnCollisionEnter(Collision other)
+
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.gameObject.tag == "Player" && hasSpawned == false)
+    //    {
+    //        Debug.Log("Ew you touched me");
+    //        for (int i = 0; i < spawnpoints.Length; i++)
+    //        {
+    //            Debug.Log("Spawned" + spawnee.name);
+    //            GameObject enemy = Instantiate(spawnee, spawnpoints[i].transform.position, spawnpoints[i].transform.rotation);
+    //            enemy.transform.parent = enemyContainer.transform;
+    //        }
+    //        hasSpawned = true;
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && hasSpawned == false)
         {
@@ -33,7 +49,15 @@ public class SpawnEnemies : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision other)
+    //private void OnCollisionExit(Collision other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        Destroy(enemyContainer);
+    //    }
+    //}
+
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {

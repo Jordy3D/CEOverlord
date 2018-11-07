@@ -367,6 +367,7 @@ MonoBehaviour:
   attackRange: 0
   stamina: 0
   regenRate: 0
+  isDashing: 0
 --- !u!54 &622711089
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -531,9 +532,9 @@ MonoBehaviour:
   takenPositions: []
   numRooms: 10
   roomTypes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1065040292695412, guid: e3653f796f85079449f3c0fbc3295ba1, type: 2}
+  - {fileID: 1065040292695412, guid: 7c0a59c6dd8a92945adeec4567a4c8b0, type: 2}
+  - {fileID: 1065040292695412, guid: 7c0a59c6dd8a92945adeec4567a4c8b0, type: 2}
   - {fileID: 1065040292695412, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
   - {fileID: 1065040292695412, guid: 34df06902eed1d94c9f9f590083585b8, type: 2}
   isBossRoom: 0
