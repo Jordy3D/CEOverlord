@@ -29,6 +29,8 @@ public class ItemPickup : MonoBehaviour
         itemDesc = ItemData.CreateItem(itemID).Description;
 
         text.text = itemName;
+
+        
     }
 
     // Update is called once per frame
@@ -49,5 +51,14 @@ public class ItemPickup : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public void UpdateItem(int itemNum)
+    {
+        itemID = itemNum;
+        itemName = ItemData.CreateItem(itemID).Name;
+        itemDesc = ItemData.CreateItem(itemID).Description;
+
+        text.text = itemName;
     }
 }

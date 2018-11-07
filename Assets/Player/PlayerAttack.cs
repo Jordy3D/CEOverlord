@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     CharacterMovement playerMove;
 
     public Glove thingGloves;
+    public GameObject hitbox;
     IEnumerator instance;
     
     #endregion
@@ -64,6 +65,7 @@ public class PlayerAttack : MonoBehaviour
                     time = 0;
                     Debug.Log("Combo started");
                 }
+
                 playerGlove.Attack();
                 comboPos++;
                 playerMove.stamina -= 5f;
