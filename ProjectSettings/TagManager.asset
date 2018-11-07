@@ -7,7 +7,11 @@ TagManager:
   - CameraPoint
   - PlayerSpawn
   - Elevator
+<<<<<<< HEAD
   - EnemySpawn
+=======
+  - ItemMaster
+>>>>>>> 818c44fc240ba7f89136eb4ee83aaef1d8abca5b
   layers:
   - Default
   - TransparentFX

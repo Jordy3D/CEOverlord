@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Enemies/EnemyBoi.prefab.meta
 guid: 36fceb2c66a4287429f7fe72b339b7a9
+=======
+guid: 2781b39d184f5274c8be37d6e8dc9839
+>>>>>>> 818c44fc240ba7f89136eb4ee83aaef1d8abca5b:Assets/Prefabs/Cell Prefabs/Cell_Boss.prefab.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 100100000

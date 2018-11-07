@@ -105,7 +105,7 @@ public class CharacterMovement : MonoBehaviour
         stamina = stats.stamina;
         regenRate = stats.regenRate;
 
-        display.UpdateDisplay();
+       display.UpdateDisplay();
     }
 
     public void Regen()
