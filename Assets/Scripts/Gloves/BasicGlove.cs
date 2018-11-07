@@ -9,7 +9,7 @@ public class BasicGlove : Glove
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
-        hitbox = transform.GetChild(0).GetComponent<SphereCollider>();
+        //hitbox = transform.GetChild(0).GetComponent<SphereCollider>();
         
         comboLimit = 3;
         player.comboLimit = comboLimit;

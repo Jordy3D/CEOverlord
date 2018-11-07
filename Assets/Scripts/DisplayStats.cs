@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class DisplayStats : MonoBehaviour
 {
     public Text healthText, moveSpeedText, damageText, attackSpeedText, attackRangeText;
+    public Slider staminaSlider;
 
     PlayerStats stats;
+    CharacterMovement player;
+
     // Use this for initialization
     void Start()
     {
@@ -17,7 +20,12 @@ public class DisplayStats : MonoBehaviour
         attackSpeedText = GameObject.Find("AttackSpeedText").GetComponent<Text>();
         attackRangeText = GameObject.Find("AttackRangeText").GetComponent<Text>();
 
+        staminaSlider = GameObject.Find("StaminaBar").GetComponent<Slider>();
+
         stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
+
+        staminaSlider.maxValue = stats.maxStamina;
 
         UpdateDisplay();
     }
@@ -30,5 +38,7 @@ public class DisplayStats : MonoBehaviour
         damageText.text = stats.damage.ToString();
         attackSpeedText.text = stats.attackSpeed.ToString();
         attackRangeText.text = stats.attackRange.ToString();
+
+        staminaSlider.value = player.stamina;
     }
 }
