@@ -14,18 +14,11 @@ public class UpdateCamera : MonoBehaviour
         cameraPoint = gameObject.transform.GetChild(0).GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             camera.transform.position = cameraPoint.position;
-
         }
     }
 }

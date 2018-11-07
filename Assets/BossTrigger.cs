@@ -11,11 +11,6 @@ public class BossTrigger : MonoBehaviour
         bossElevator = GameObject.FindGameObjectWithTag("Elevator").GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
