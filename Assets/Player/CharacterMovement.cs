@@ -22,6 +22,7 @@ public class CharacterMovement : MonoBehaviour
 
    
     bool isCoRunning = false;
+    public bool isDashing = false;
     
     
 
@@ -30,7 +31,7 @@ public class CharacterMovement : MonoBehaviour
         //gets and attaches the rigidbody
         playerRB = GetComponent<Rigidbody>();
         //constains the x rotation, z rotation and y position
-        playerRB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        playerRB.constraints = RigidbodyConstraints.FreezeRotation;
         //main camera is equal to the camera in the scene
 
         stats = GetComponent<PlayerStats>();
@@ -41,7 +42,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update()
+    public void FixedUpdate()
     {
        
         if (canRegen)
@@ -59,10 +60,11 @@ public class CharacterMovement : MonoBehaviour
         
         Vector3 moveDir = new Vector3(inputH, 0f, inputV) * moveSpeed;
         Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
-        if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0 && !isDashing)
         {
+
+
             
-            playerRB.AddForce(force * 10f, ForceMode.Impulse);
             stamina -= 20f;
             if(stamina < 0)
             {
@@ -73,6 +75,7 @@ public class CharacterMovement : MonoBehaviour
 
             CallRegenStam();
         }
+
         playerRB.velocity = force;
         if (playerRB.velocity != Vector3.zero)
         {
@@ -121,6 +124,8 @@ public class CharacterMovement : MonoBehaviour
         canRegen = true;
         isCoRunning = false;
     }
+
+    
 
     public void CallRegenStam()
     {
