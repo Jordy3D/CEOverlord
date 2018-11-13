@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -113,6 +113,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &10708893
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -19.187393
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 17.40094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -35.777615
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782994515490174, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ffbb8d7b6295e674ebf31540ab602291, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &136262142
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +264,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &176395176
 GameObject:
@@ -265,65 +307,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &247460309
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -28.126377
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 17.493643
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -39.973534
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4782994515490174, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d2d65775e056b244ca1b41fd7eff1a41, type: 2}
-  m_IsPrefabAsset: 0
---- !u!1 &247460310 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1334098726603324, guid: d2d65775e056b244ca1b41fd7eff1a41,
-    type: 2}
-  m_PrefabInternal: {fileID: 247460309}
---- !u!114 &247460311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 247460310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07cffe728ef4854ab78d06119b7c6a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomItem: {fileID: 1339875788}
 --- !u!1 &299514377
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,12 +562,6 @@ MonoBehaviour:
   gloves:
   - {fileID: 114617977100672174, guid: 8a91b32428080c5459fa01e07a6cea2c, type: 2}
   - {fileID: 114508697236701854, guid: 72edf314f62f5ea47b20776542e332bd, type: 2}
---- !u!114 &1339875788 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114163302371873384, guid: d2d65775e056b244ca1b41fd7eff1a41,
-    type: 2}
-  m_PrefabInternal: {fileID: 247460309}
-  m_Script: {fileID: 11500000, guid: e5f4ab98d47a0744ab41a7ea572f68f5, type: 3}
 --- !u!1 &1563386213
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +649,7 @@ Prefab:
     - target: {fileID: 224218714779335822, guid: 0afb5791758d8ca4b96e7077d09c07f7,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224218714779335822, guid: 0afb5791758d8ca4b96e7077d09c07f7,
         type: 2}
@@ -712,7 +689,7 @@ Prefab:
     - target: {fileID: 224218714779335822, guid: 0afb5791758d8ca4b96e7077d09c07f7,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224218714779335822, guid: 0afb5791758d8ca4b96e7077d09c07f7,
         type: 2}
@@ -878,7 +855,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   attackRange: 0
-  stamina: 100
+  maxStamina: 100
   regenRate: 5
 --- !u!114 &1732213434
 MonoBehaviour:
@@ -936,6 +913,8 @@ MonoBehaviour:
   attackRange: 0
   stamina: 0
   regenRate: 0
+  dashTime: 0
+  isDashing: 0
 --- !u!54 &1732213437
 Rigidbody:
   m_ObjectHideFlags: 0

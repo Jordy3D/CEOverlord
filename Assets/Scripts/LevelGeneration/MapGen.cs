@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MapGen : MonoBehaviour
+
+    //ROOM TYPING:
+
+
 {
 	public int seed = 0;
 
@@ -89,7 +93,7 @@ public class MapGen : MonoBehaviour
         //set up for method
         rooms = new Room[gridSizeX * 2, gridSizeZ * 2];
         //PLACE STARTING ROOM NEAR CENTRE OF GRID TO ENSURE MAX SPREAD. room type 1 for starting room
-        rooms[gridSizeX, gridSizeZ] = new Room(Vector3.zero, 0);
+        rooms[gridSizeX, gridSizeZ] = new Room(Vector3.zero, -3);
         //add the starting room to list of taken room positions
         takenPositions.Insert(0, Vector3.zero);
         //use position to make checks later
@@ -133,7 +137,7 @@ public class MapGen : MonoBehaviour
 
             //finalize position
             //create a new room at check pos, adding it to the 2d array with offset 
-            int roomType = Mathf.RoundToInt(Random.Range(1f, 2f));
+            int roomType = Mathf.RoundToInt(Random.Range(0f, 2f));
             rooms[(int)checkPos.x + gridSizeX, (int)checkPos.z + gridSizeZ] = new Room(checkPos, roomType);
             takenPositions.Insert(0, checkPos);
         }
@@ -318,7 +322,8 @@ public class MapGen : MonoBehaviour
             roomPos.x *= 26;
             roomPos.z *= 16;
 
-            RoomSelector roomCurrent = Object.Instantiate(roomTypes[room.type], roomPos, Quaternion.identity).GetComponent<RoomSelector>();
+            GetRoomModel(room);
+            RoomSelector roomCurrent = Object.Instantiate(room.roomModel, roomPos, Quaternion.identity).GetComponent<RoomSelector>();
             roomCurrent.gridPos = room.roomPos;
             roomCurrent.up = room.doorTop;
             roomCurrent.down = room.doorBot;
@@ -341,6 +346,7 @@ public class MapGen : MonoBehaviour
 
         foreach (Room room in rooms)
         {
+            
             if (room == null)
             {
                 continue;
@@ -361,7 +367,8 @@ public class MapGen : MonoBehaviour
 
         if (bossRoom != null)
         {
-            bossRoom.type = 4;
+            //bossRoom.type = 4;
+            bossRoom.type = -2;
             isBossRoom = true;
             
         }
@@ -388,7 +395,7 @@ public class MapGen : MonoBehaviour
             if (NumberOfAdjacentRooms(pos, takenPositions) == 1)
             {
                 //if not boss room or starting room
-                if (room.type != 4 && room.type != 0)
+                if (room.type != -2 && room.type != -3)
                 {
                     possibleRooms.Add(room);
                     bool makeRoom = (Random.value > 0.7f);
@@ -398,13 +405,13 @@ public class MapGen : MonoBehaviour
                     {
                         if (numRooms < 6 && treasureRoomCount < 1)
                         {
-                            room.type = 3;
+                            room.type = -1;
                             treasureRoomCount++;
                             madeTreasureRoom = true;
                         }
                         else if (numRooms >= 6 && treasureRoomCount < 2)
                         {
-                            room.type = 3;
+                            room.type = -1;
                             treasureRoomCount++;
                             madeTreasureRoom = true;
                         }
@@ -419,7 +426,7 @@ public class MapGen : MonoBehaviour
             if (possibleRooms.Count != 0)
             {
                 int listIndex = Mathf.RoundToInt(Random.Range(0, (possibleRooms.Count - 1)));
-                possibleRooms[listIndex].type = 3;
+                possibleRooms[listIndex].type = -1;
                 Debug.Log("Manual Treasure Room");
                 madeTreasureRoom = true;
             }
@@ -504,5 +511,26 @@ public class MapGen : MonoBehaviour
     public void Reset()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GetRoomModel(Room room)
+    {
+        
+        if (room.type == -1)
+        {
+            room.roomModel = Resources.Load("Cell Prefabs/Cell_Treasure", typeof(GameObject)) as GameObject;
+        }
+        else if (room.type == -2)
+        {
+            room.roomModel = Resources.Load("Cell Prefabs/Cell_Boss", typeof(GameObject)) as GameObject;
+        }
+        else if (room.type == -3)
+        {
+            room.roomModel = Resources.Load("Cell Prefabs/Cell_Start", typeof(GameObject)) as GameObject;
+        } else
+        {
+            room.roomModel = Resources.Load("Cell Prefabs/Cell_CentreTest_" + room.type, typeof(GameObject)) as GameObject;
+          
+        }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -250,24 +250,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511267970}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.05, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.11, y: 0, z: 0.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 622711095}
+  m_Father: {fileID: 721566537}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &511267972
-BoxCollider:
+--- !u!135 &511267972
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511267970}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &511267973
 MeshRenderer:
@@ -310,7 +310,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511267970}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &622711086
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +367,7 @@ MonoBehaviour:
   attackRange: 0
   stamina: 0
   regenRate: 0
+  dashTime: 0
   isDashing: 0
 --- !u!54 &622711089
 Rigidbody:
@@ -391,14 +392,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 622711086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4ceefe1f01d7841a325a7f317a927e, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e88a5c69fa6364da798431a6063c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sequence: 200000002000000020000000
+  playerGlove: {fileID: 0}
+  comboLimit: 0
   time: 0
-  coolDownTime: 0
-  coolDownLimit: 0.6
-  hitTest: {fileID: 0}
+  comboPos: 0
+  isCombo: 0
+  isCooldown: 0
+  canCombo: 1
+  coolDownLimit: 0.3
+  comboTimeLimit: 0.5
+  thingGloves: {fileID: 0}
+  hitbox: {fileID: 0}
 --- !u!114 &622711091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +422,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   attackRange: 0
-  stamina: 100
+  maxStamina: 100
   regenRate: 5
 --- !u!136 &622711092
 CapsuleCollider:
@@ -445,7 +452,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 098342a8756c5604988b795f31268bb3, type: 2}
+  - {fileID: 2100000, guid: 1d8d9264d8e56dd48b46daaa681ec9ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -482,7 +489,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 511267971}
+  - {fileID: 721566537}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -500,6 +507,67 @@ MonoBehaviour:
   player: {fileID: 0}
   playerRB: {fileID: 0}
   playerSpawnPoint: {fileID: 0}
+--- !u!1 &721566536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721566537}
+  - component: {fileID: 721566539}
+  - component: {fileID: 721566538}
+  m_Layer: 0
+  m_Name: GloveHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &721566537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 721566536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 511267971}
+  m_Father: {fileID: 622711095}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721566538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 721566536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51cd88da677b034f9b42047723f644f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  comboLimit: 3
+  range: 0
+  player: {fileID: 0}
+  hitbox: {fileID: 0}
+--- !u!114 &721566539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 721566536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d87f116378f7f44ead8a80ba4c47e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gloves:
+  - {fileID: 114617977100672174, guid: 8a91b32428080c5459fa01e07a6cea2c, type: 2}
+  - {fileID: 114508697236701854, guid: 72edf314f62f5ea47b20776542e332bd, type: 2}
 --- !u!1 &1248888578
 GameObject:
   m_ObjectHideFlags: 0

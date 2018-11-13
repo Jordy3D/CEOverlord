@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     public float stamina;
     public static bool canRegen = true;
     public float regenRate;
+    public float dashTime = 0f;
 
     PlayerStats stats;
     DisplayStats display;
@@ -39,9 +40,24 @@ public class CharacterMovement : MonoBehaviour
         UpdateStats();
     }
 
+
+    private void Update()
+    {
+        if (isDashing)
+        {
+            dashTime += Time.deltaTime;
+            if(dashTime > 0.2f)
+            {
+                isDashing = false;
+                dashTime = 0;
+            }
+        }
+    }
     // Update is called once per frame
     public void FixedUpdate()
     {
+
+
 
         if (canRegen)
         {
@@ -68,6 +84,8 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0 && !isDashing)
         {
+            playerRB.velocity = Vector3.zero;
+
             stamina -= 20f;
             if (stamina < 0)
             {
@@ -79,6 +97,14 @@ public class CharacterMovement : MonoBehaviour
             display.UpdateDisplay();
 
             CallRegenStam();
+
+            isDashing = true;
+        }
+
+        if (isDashing)
+        {
+            force = force * 2f;
+            dashTime += Time.deltaTime; 
         }
 
         playerRB.velocity = force;

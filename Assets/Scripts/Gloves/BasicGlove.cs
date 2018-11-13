@@ -9,7 +9,7 @@ public class BasicGlove : Glove
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
-        //hitbox = transform.GetChild(0).GetComponent<SphereCollider>();
+        hitbox = transform.GetChild(0).GetComponent<SphereCollider>();
         
         comboLimit = 3;
         player.comboLimit = comboLimit;
@@ -19,7 +19,8 @@ public class BasicGlove : Glove
     public override void Attack()
     {
         Debug.Log("This is basic glove");
-        hitbox.enabled = true;
+        hitbox.gameObject.SetActive(true);
+        //hitbox.enabled = true;
         CallDeactivateHitbox();
     }
 
@@ -27,7 +28,8 @@ public class BasicGlove : Glove
     {
         isCoRunning = true;
         yield return new WaitForSeconds(0.2f);
-        hitbox.enabled = false;
+        hitbox.gameObject.SetActive(false);
+        //hitbox.enabled = false;
         isCoRunning = false;
     }
 
