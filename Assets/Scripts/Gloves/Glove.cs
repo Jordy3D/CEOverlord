@@ -11,6 +11,8 @@ public abstract class Glove : MonoBehaviour
     public int comboLimit;
     public float range;
     public PlayerAttack player;
+    
+    public CharacterMovement playerMove;
     #endregion
     // Use this for initialization
     void Start()

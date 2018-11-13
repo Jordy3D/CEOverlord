@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114294757935585146}
   m_Layer: 0
   m_Name: EnemyBoi
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   me: {fileID: 0}
   player: {fileID: 0}
+  health: 10
 --- !u!136 &136205247426989076
 CapsuleCollider:
   m_ObjectHideFlags: 1

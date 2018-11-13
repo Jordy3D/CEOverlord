@@ -10,7 +10,7 @@ public class CharacterMovement : MonoBehaviour
 
     public static float health;
     public float moveSpeed;
-    public float damage;
+    public static float damage;
     public float attackSpeed;
     public float attackRange;
     public float stamina;
@@ -94,7 +94,7 @@ public class CharacterMovement : MonoBehaviour
             }
             canRegen = false;
 
-            display.UpdateDisplay();
+            
 
             CallRegenStam();
 
@@ -118,6 +118,9 @@ public class CharacterMovement : MonoBehaviour
         {
             stamina = 0;
         }
+
+        //update the display
+        display.UpdateDisplay();
     }
 
     void OnTriggerStay(Collider enemy)

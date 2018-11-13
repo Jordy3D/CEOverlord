@@ -7,6 +7,7 @@ public class BasicEnemy : MonoBehaviour
 {
     public NavMeshAgent me;
     public Transform player;
+    public float health = 10f;
     // Use this for initialization
     void Start()
     {
@@ -18,5 +19,14 @@ public class BasicEnemy : MonoBehaviour
     void Update()
     {
         me.SetDestination(player.position);
+        if(health < 0)
+        {
+            health = 0;
+        }
+
+        if(health == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
