@@ -12,7 +12,7 @@ public abstract class Glove : MonoBehaviour
     public float range;
     public PlayerAttack player;
     
-    public CharacterMovement playerMove;
+    public PlayerManager playerManager;
     #endregion
     // Use this for initialization
     void Start()

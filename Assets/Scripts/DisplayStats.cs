@@ -9,7 +9,7 @@ public class DisplayStats : MonoBehaviour
     public Slider staminaSlider;
 
     PlayerStats stats;
-    CharacterMovement player;
+    PlayerManager player;
 
     // Use this for initialization
     void Start()
@@ -23,7 +23,7 @@ public class DisplayStats : MonoBehaviour
         staminaSlider = GameObject.Find("StaminaBar").GetComponent<Slider>();
 
         stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
 
         staminaSlider.maxValue = stats.maxStamina;
 
