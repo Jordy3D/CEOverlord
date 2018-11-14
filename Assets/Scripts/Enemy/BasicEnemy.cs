@@ -36,7 +36,6 @@ public class BasicEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if(canFire == false)
         {
             timer += Time.deltaTime;
@@ -48,19 +47,20 @@ public class BasicEnemy : MonoBehaviour
         }
 
         me.SetDestination(player.position);
-        
-        
+                
         if (canFire)
         {
             enemyAttack.Attack();
             canFire = false;
         }
-        if(health < 0)
 
-        healthBar.fillAmount = curHealth / maxHealth;
-        me.SetDestination(player.position);
+        if (health > 0)
+        {
+            healthBar.fillAmount = curHealth / maxHealth;
+            me.SetDestination(player.position);
+        }
+
         if(curHealth < 0)
-
         {
             curHealth = 0;
         }

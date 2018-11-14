@@ -79,7 +79,7 @@ public class MapGen : MonoBehaviour
         CreateMap();
         FindTeleportPoint();
        //Debug.Log(rooms.Length);
-        Debug.Log(Time.realtimeSinceStartup);
+        Debug.Log("It took " + Time.realtimeSinceStartup + " seconds to generate the level");
     }
 
     private void Start()

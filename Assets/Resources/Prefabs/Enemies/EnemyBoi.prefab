@@ -237,7 +237,7 @@ MonoBehaviour:
   attackDelay: 0
   maxHealth: 10
   curHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 114765438003722776}
 --- !u!114 &114598488169095150
 MonoBehaviour:
   m_ObjectHideFlags: 1

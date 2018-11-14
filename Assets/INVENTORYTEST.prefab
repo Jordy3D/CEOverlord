@@ -54,8 +54,6 @@ GameObject:
   - component: {fileID: 33580960301301894}
   - component: {fileID: 23182155797508380}
   - component: {fileID: 135215525379499342}
-  - component: {fileID: 114689583779592458}
-  - component: {fileID: 114719310092859444}
   m_Layer: 0
   m_Name: PlayerBoi
   m_TagString: Untagged
@@ -123,7 +121,6 @@ GameObject:
   - component: {fileID: 4663785939963584}
   - component: {fileID: 20735929358460752}
   - component: {fileID: 81037361606630580}
-  - component: {fileID: 114493079852293516}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -617,18 +614,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114493079852293516
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494148348615842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9de35699fb5494478bb9daa2f4eec76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PostProcessMat: {fileID: 2100000, guid: 153607812153d144d9f3134885970326, type: 2}
 --- !u!114 &114632653217205336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -691,64 +676,6 @@ MonoBehaviour:
   m_Text: 'Options
 
 '
---- !u!114 &114689583779592458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287539850947340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6210659ed5c7dcd4093c94fdc0b65505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 0
-  scr: {x: 0, y: 0}
-  scrollPos: {x: 0, y: 0}
---- !u!114 &114719310092859444
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1287539850947340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9267ed8947f2d404cbba757e2a38f534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  gamePanel: {fileID: 0}
-  optionsMenu: {fileID: 0}
-  audioSource: {fileID: 0}
-  volumeSlider: {fileID: 0}
-  volumeToggle: {fileID: 0}
-  brightnessSlider: {fileID: 0}
-  ambientSlider: {fileID: 0}
-  isFullScreen: 0
-  fullscreenToggle: {fileID: 0}
-  resDropdown: {fileID: 0}
-  holdingKey: 0
-  forward: 0
-  backward: 0
-  left: 0
-  right: 0
-  jump: 0
-  crouch: 0
-  sprint: 0
-  interact: 0
-  forwardText: {fileID: 0}
-  backwardText: {fileID: 0}
-  leftText: {fileID: 0}
-  rightText: {fileID: 0}
-  jumpText: {fileID: 0}
-  crouchText: {fileID: 0}
-  sprintText: {fileID: 0}
-  interactText: {fileID: 0}
-  resolutionIndex: 0
-  dirLight: {fileID: 0}
-  brightnessImage: {fileID: 0}
-  showOptions: 0
-  levelSelect: 0
 --- !u!114 &114985907413000884
 MonoBehaviour:
   m_ObjectHideFlags: 1

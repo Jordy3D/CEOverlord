@@ -11,8 +11,7 @@ public class DisplayStats : MonoBehaviour
     PlayerStats stats;
     PlayerManager player;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         healthText = GameObject.Find("HealthText").GetComponent<Text>();
         moveSpeedText = GameObject.Find("MoveSpeedText").GetComponent<Text>();
@@ -24,6 +23,12 @@ public class DisplayStats : MonoBehaviour
 
         stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        
 
         staminaSlider.maxValue = stats.maxStamina;
 
@@ -33,7 +38,7 @@ public class DisplayStats : MonoBehaviour
     // Update is called once per frame
     public void UpdateDisplay()
     {
-        healthText.text = stats.health.ToString();
+        healthText.text = player.health + "/" + player.maxHealth;
         moveSpeedText.text = stats.moveSpeed.ToString();
         damageText.text = stats.damage.ToString();
         attackSpeedText.text = stats.attackSpeed.ToString();
