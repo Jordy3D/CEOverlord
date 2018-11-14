@@ -18,8 +18,8 @@ public class HitboxDamage : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<BasicEnemy>().health -= CharacterMovement.damage;
-            Debug.Log("Did " + CharacterMovement.damage + " damage to enemy");
+            other.gameObject.GetComponent<BasicEnemy>().health -= PlayerManager.damage;
+            Debug.Log("Did " + PlayerManager.damage + " damage to enemy");
         }
     }
 }

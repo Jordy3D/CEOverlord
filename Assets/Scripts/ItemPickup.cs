@@ -7,7 +7,7 @@ public class ItemPickup : MonoBehaviour
     public int itemID = 0;
 
     GameObject playerObject;
-    CharacterMovement player;
+    PlayerManager player;
     Inventory playerInv;
     PlayerStats stats;
 
@@ -19,7 +19,7 @@ public class ItemPickup : MonoBehaviour
     void Start()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        player = playerObject.GetComponent<CharacterMovement>();
+        player = playerObject.GetComponent<PlayerManager>();
         playerInv = playerObject.GetComponent<Inventory>();
         stats = playerObject.GetComponent<PlayerStats>();
 

@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public int comboPos = 0;
     public bool isCombo, isCooldown, canCombo = true;
     public float coolDownLimit, comboTimeLimit;
-    CharacterMovement playerMove;
+    PlayerManager playerManager;
 
     public Glove thingGloves;
     public GameObject hitbox;
@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerGlove = transform.GetChild(0).GetComponent<Glove>();
-        playerMove = GetComponent<CharacterMovement>();
+        playerManager = GetComponent<PlayerManager>();
         thingGloves = null;
     }
 
@@ -57,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(comboPos < comboLimit && canCombo && playerMove.stamina != 0)
+            if(comboPos < comboLimit && canCombo && playerManager.stamina != 0)
             {
                 if (comboPos == 0)
                 {
@@ -68,9 +68,9 @@ public class PlayerAttack : MonoBehaviour
 
                 playerGlove.Attack();
                 comboPos++;
-                playerMove.stamina -= 5f;
-                CharacterMovement.canRegen = false;
-                playerMove.CallRegenStam();
+                playerManager.stamina -= 5f;
+                playerManager.canRegen = false;
+                playerManager.CallRegenStam();
                 
                 if(comboPos == comboLimit)
                 {

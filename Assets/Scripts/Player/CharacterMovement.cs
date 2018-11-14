@@ -8,20 +8,16 @@ public class CharacterMovement : MonoBehaviour
     public Rigidbody playerRB;
     //references the rigidbody for the player
 
-    public static float health;
+   
     public float moveSpeed;
-    public static float damage;
-    public float attackSpeed;
-    public float attackRange;
-    public float stamina;
-    public static bool canRegen = true;
+    
     public float regenRate;
     public float dashTime = 0f;
 
-    PlayerStats stats;
-    DisplayStats display;
+    public PlayerStats stats;
+    PlayerManager playerManager;
 
-    bool isCoRunning = false;
+    
 
     public bool isDashing = false;
     
@@ -32,12 +28,9 @@ public class CharacterMovement : MonoBehaviour
         //constains the x rotation, z rotation and y position
         playerRB.constraints = RigidbodyConstraints.FreezeRotation;
         //main camera is equal to the camera in the scene
-
+        playerManager = GetComponent<PlayerManager>();
         stats = GetComponent<PlayerStats>();
-
-        display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
-
-        UpdateStats();
+        //UpdateStats();
     }
 
 
@@ -56,17 +49,7 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     public void FixedUpdate()
     {
-
-
-
-        if (canRegen)
-        {
-            Regen();
-            if (stamina > 100)
-            {
-                stamina = 100;
-            }
-        }
+        
 
         float inputH = Input.GetAxis("Horizontal") * moveSpeed;
         float inputV = Input.GetAxis("Vertical") * moveSpeed;
@@ -82,21 +65,21 @@ public class CharacterMovement : MonoBehaviour
         //    Vector3 newPosition = force * 10f;
         //    // Use new position to lerp
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0 && !isDashing)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && playerManager.stamina > 0 && !isDashing)
         {
             playerRB.velocity = Vector3.zero;
-
-            stamina -= 20f;
-            if (stamina < 0)
+            playerRB.AddForce(force * 3f, ForceMode.Impulse);
+            playerManager.stamina -= 20f;
+            if (playerManager.stamina < 0)
             {
-                stamina = 0;
+                playerManager.stamina = 0;
                 Debug.Log("Out of stamina");
             }
-            canRegen = false;
+            playerManager.canRegen = false;
 
             
 
-            CallRegenStam();
+            playerManager.CallRegenStam();
 
             isDashing = true;
         }
@@ -114,13 +97,6 @@ public class CharacterMovement : MonoBehaviour
             playerRB.rotation = Quaternion.LookRotation(playerRB.velocity);
         }
 
-        if (stamina < 0)
-        {
-            stamina = 0;
-        }
-
-        //update the display
-        display.UpdateDisplay();
     }
 
     void OnTriggerStay(Collider enemy)
@@ -132,40 +108,14 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+   
+
+    
+
+    //called from playerManager to update needed values here
     public void UpdateStats()
     {
-        health = stats.health;
         moveSpeed = stats.moveSpeed;
-        damage = stats.damage;
-        attackSpeed = stats.attackSpeed;
-        attackRange = stats.attackRange;
-        stamina = stats.maxStamina;
         regenRate = stats.regenRate;
-
-        display.UpdateDisplay();
-    }
-
-    public void Regen()
-    {
-        stamina += regenRate * Time.deltaTime;
-        display.UpdateDisplay();
-    }
-
-    public IEnumerator RegenStam()
-    {
-        isCoRunning = true;
-        yield return new WaitForSeconds(4f);
-        canRegen = true;
-        isCoRunning = false;
-    }
-
-    public void CallRegenStam()
-    {
-        if (isCoRunning)
-        {
-            StopCoroutine(RegenStam());
-            isCoRunning = false;
-        }
-        StartCoroutine(RegenStam());
     }
 }
