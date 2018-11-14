@@ -154,7 +154,7 @@ MonoBehaviour:
   me: {fileID: 0}
   player: {fileID: 0}
   maxHealth: 10
-  currentHealth: 0
+  curHealth: 0
   healthBar: {fileID: 114765438003722776}
 --- !u!114 &114642644033839090
 MonoBehaviour:
