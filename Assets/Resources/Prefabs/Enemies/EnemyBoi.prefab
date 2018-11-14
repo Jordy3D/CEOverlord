@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 136205247426989076}
   - component: {fileID: 195905634429946482}
   - component: {fileID: 114294757935585146}
+  - component: {fileID: 114990041783717240}
   m_Layer: 0
   m_Name: EnemyBoi
   m_TagString: Enemy
@@ -67,6 +68,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1958781998731420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4873667721500262}
+  m_Layer: 0
+  m_Name: SpawnP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1962682242469302
 GameObject:
   m_ObjectHideFlags: 1
@@ -95,8 +111,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224790653465192440}
+  - {fileID: 4873667721500262}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4873667721500262
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958781998731420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4318722360704528}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23138009887337798
 MeshRenderer:
@@ -153,9 +183,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   me: {fileID: 0}
   player: {fileID: 0}
+  enemyAttack: {fileID: 0}
+  health: 10
   maxHealth: 10
   curHealth: 0
-  healthBar: {fileID: 114765438003722776}
+  healthBar: {fileID: 0}
 --- !u!114 &114642644033839090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,6 +294,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114990041783717240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014070144042980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec0f88a256f0d0468224f378be960f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawn: {fileID: 4873667721500262}
+  projectile: {fileID: 1578936306318158, guid: ec479fc6a789c5c4dba11aa014ea97b0, type: 2}
 --- !u!136 &136205247426989076
 CapsuleCollider:
   m_ObjectHideFlags: 1

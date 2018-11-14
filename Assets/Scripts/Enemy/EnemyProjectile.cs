@@ -26,12 +26,5 @@ public abstract class EnemyProjectile : MonoBehaviour {
         projectile.AddForce(fireDir * speed, ForceMode.Impulse);
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerManager>().ChangeHealth(damage);  
-        }
-        Destroy(this.gameObject);
-    }
+    
 }
