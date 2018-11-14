@@ -19,7 +19,7 @@ public class SpawnEnemies : MonoBehaviour
 
         enemyContainer = mommy.transform.Find("Enemies").gameObject;
         spawnpoints = mommy.transform.Find("EnemySpawns").GetComponentsInChildren<Transform>();
-
+        
         doors = mommy.transform.Find("Doors").gameObject;
     }
 
