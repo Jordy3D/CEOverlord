@@ -377,6 +377,7 @@ MonoBehaviour:
   moveSpeed: 2
   regenRate: 0
   dashTime: 0
+  isInputAllowed: 1
   stats: {fileID: 0}
   isDashing: 0
 --- !u!54 &622711089
@@ -760,53 +761,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c8238ed95c378a44bd72a55f965057b, type: 2}
-  m_IsPrefabAsset: 0
---- !u!1001 &2032884573
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 9.814545
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 40.269768
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -15.509668
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318722360704528, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114598488169095150, guid: 36fceb2c66a4287429f7fe72b339b7a9,
-        type: 2}
-      propertyPath: knockBack
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 36fceb2c66a4287429f7fe72b339b7a9, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &2100027406
 GameObject:
