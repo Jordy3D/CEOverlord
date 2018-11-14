@@ -8,7 +8,7 @@ public class BasicProjectile : EnemyProjectile {
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerManager>().ChangeHealth(damage);
+            collision.gameObject.GetComponent<PlayerManager>().ChangeHealth(-damage);
         }
         Destroy(this.gameObject);
     }

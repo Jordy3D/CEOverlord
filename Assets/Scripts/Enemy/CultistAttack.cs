@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CultistAttack : EnemyAttack {
+public class CultistAttack : EnemyAttack
+{
 
     public override void Attack()
     {

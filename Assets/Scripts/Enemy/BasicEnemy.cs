@@ -10,8 +10,9 @@ public class BasicEnemy : MonoBehaviour
     public Transform player;
     public EnemyAttack enemyAttack;
     public float health = 10f;
-    bool canFire = true;
-    float timer = 0f;
+    public bool canFire = true;
+    public float timer = 0f;
+    public float attackDelay;
 
     public float maxHealth = 10f;
     public float curHealth;
@@ -28,6 +29,7 @@ public class BasicEnemy : MonoBehaviour
 
 
         curHealth = maxHealth;
+        attackDelay = enemyAttack.delay;
 
     }
 
@@ -38,18 +40,20 @@ public class BasicEnemy : MonoBehaviour
         if(canFire == false)
         {
             timer += Time.deltaTime;
-            if(timer >= 0.7f)
+            if(timer >= attackDelay)
             {
                 canFire = true;
+                timer = 0;
             }
         }
 
         me.SetDestination(player.position);
-        //maybe this line??
-        me.transform.LookAt(player.position);
+        
+        
         if (canFire)
         {
             enemyAttack.Attack();
+            canFire = false;
         }
         if(health < 0)
 

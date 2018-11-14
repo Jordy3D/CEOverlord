@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
     
     public float regenRate;
     public float dashTime = 0f;
+    public bool isInputAllowed = true;
 
     public PlayerStats stats;
     PlayerManager playerManager;
@@ -68,7 +69,9 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && playerManager.stamina > 0 && !isDashing)
         {
             playerRB.velocity = Vector3.zero;
-            playerRB.AddForce(force * 3f, ForceMode.Impulse);
+            isInputAllowed = false;
+            playerRB.AddForce(force.normalized * 20f, ForceMode.Impulse);
+            StartCoroutine(EnableInput(0.1f));
             playerManager.stamina -= 20f;
             if (playerManager.stamina < 0)
             {
@@ -81,22 +84,30 @@ public class CharacterMovement : MonoBehaviour
 
             playerManager.CallRegenStam();
 
-            isDashing = true;
+
+            // Coroutine to set "isInputAllowed" to false
+                // Sets bool back to true after a few milliseconds
+
+            //isDashing = true;
         }
 
+        /*
         if (isDashing)
         {
             force = force * 2f;
             dashTime += Time.deltaTime; 
         }
+        */
 
-        playerRB.velocity = force;
+        // Make bool called:
+        if(isInputAllowed)
+            playerRB.velocity = force;
 
         if (playerRB.velocity != Vector3.zero)
         {
             playerRB.rotation = Quaternion.LookRotation(playerRB.velocity);
         }
-
+        
     }
 
     void OnTriggerStay(Collider enemy)
@@ -117,5 +128,11 @@ public class CharacterMovement : MonoBehaviour
     {
         moveSpeed = stats.moveSpeed;
         regenRate = stats.regenRate;
+    }
+
+    public IEnumerator EnableInput(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isInputAllowed = true;
     }
 }
