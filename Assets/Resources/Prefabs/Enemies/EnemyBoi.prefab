@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 136205247426989076}
   - component: {fileID: 195905634429946482}
   - component: {fileID: 114294757935585146}
-  - component: {fileID: 114045492981815946}
+  - component: {fileID: 114747737228161992}
   m_Layer: 0
   m_Name: EnemyBoi
   m_TagString: Enemy
@@ -201,22 +201,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1014070144042980}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114045492981815946
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1014070144042980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a8eb7f8c8c0fe94ca4b3456d00accac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
-  projectile: {fileID: 1091146495663666}
-  delay: 3
-  agent: {fileID: 0}
-  hitbox: {fileID: 0}
 --- !u!114 &114294757935585146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,6 +262,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114747737228161992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014070144042980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5efaab0e8fe4d428b064ac330c00cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawn: {fileID: 0}
+  projectile: {fileID: 1578936306318158, guid: 5a76e8b0408ff8e4db22ea47fac2dfdb, type: 2}
+  delay: 4
+  numProjectiles: 5
+  radius: 1
 --- !u!114 &114765438003722776
 MonoBehaviour:
   m_ObjectHideFlags: 1
