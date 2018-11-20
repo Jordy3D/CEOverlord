@@ -4,17 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MapGen : MonoBehaviour
-
-    //ROOM TYPING:
-
-
 {
 	public int seed = 0;
 
     public int tries = 0;
 
     //how big is the world? using room lengths as units
-
     Vector3 mapSizeTotal;
 
     //2d array to hold rooms
@@ -75,6 +70,7 @@ public class MapGen : MonoBehaviour
         gridSizeZ = Mathf.RoundToInt(mapSizeTotal.z);
         player = GameObject.FindGameObjectWithTag("Player");
         playerSpawn = player.GetComponent<PlayerSpawn>();
+
         SetUpMap();
         CreateMap();
         FindTeleportPoint();
@@ -114,8 +110,6 @@ public class MapGen : MonoBehaviour
             checkPos = NewPosition();
 
             //test new position. If statement here uses values above to have dungeon branch less as it creates more rooms
-
-
             if (NumberOfAdjacentRooms(checkPos, takenPositions) > 1 && Random.value > randomCompare)
             {
                 int iterations = 0;
@@ -127,13 +121,12 @@ public class MapGen : MonoBehaviour
                     iterations++;
 
                 }
+
                 if (iterations >= 50)
                 {
                     Debug.Log("Couldnt create with fewer neighbours than :" + NumberOfAdjacentRooms(checkPos, takenPositions));
                 }
-
             }
-
 
             //finalize position
             //create a new room at check pos, adding it to the 2d array with offset 
@@ -141,8 +134,6 @@ public class MapGen : MonoBehaviour
             rooms[(int)checkPos.x + gridSizeX, (int)checkPos.z + gridSizeZ] = new Room(checkPos, roomType);
             takenPositions.Insert(0, checkPos);
         }
-
-
     }
 
     public Vector3 NewPosition()
@@ -157,6 +148,7 @@ public class MapGen : MonoBehaviour
             z = (int)takenPositions[index].z;
             bool ZAxis = (Random.value < 0.5f);
             bool positive = (Random.value < 0.5f);
+
             if (ZAxis)
             {
                 if (positive)
@@ -180,7 +172,6 @@ public class MapGen : MonoBehaviour
                 }
             }
             checkingPos = new Vector3(x, 0f, z);
-
         }
         return checkingPos;
     }
@@ -188,7 +179,6 @@ public class MapGen : MonoBehaviour
     //gets the number of rooms next to a given pos
     public int NumberOfAdjacentRooms(Vector3 pos, List<Vector3> usedPositions)
     {
-
         int returnedVal = 0;
         if (usedPositions.Contains(pos + Vector3.right))
         {
@@ -207,7 +197,6 @@ public class MapGen : MonoBehaviour
             returnedVal++;
         }
         return returnedVal;
-
     }
 
     //getting room that only has 1 neighbour. adds to branching effect when required
@@ -317,6 +306,7 @@ public class MapGen : MonoBehaviour
             {
                 continue;
             }
+
             Vector3 roomPos = room.roomPos;
             //needs to be room dimensions (estimates)
             roomPos.x *= 26;
@@ -332,7 +322,6 @@ public class MapGen : MonoBehaviour
             roomCurrent.type = room.type;
             realRooms.Add(roomCurrent.gridPos, roomCurrent);
             realRoomsList.Add(roomCurrent);
-
         }
     }
 
@@ -530,7 +519,6 @@ public class MapGen : MonoBehaviour
         } else
         {
             room.roomModel = Resources.Load("Cell Prefabs/Cell_CentreTest_" + room.type, typeof(GameObject)) as GameObject;
-          
         }
     }
 }

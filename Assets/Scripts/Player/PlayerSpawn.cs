@@ -9,6 +9,10 @@ public class PlayerSpawn : MonoBehaviour
     public Rigidbody playerRB;
     public GameObject playerSpawnPoint;
 
+    public int currentFloor;
+
+    Animator bossElevator;
+
     // Use this for initialization
     void Awake()
     {
@@ -16,16 +20,33 @@ public class PlayerSpawn : MonoBehaviour
         playerRB = player.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        bossElevator = GameObject.FindGameObjectWithTag("SpawnElevator").GetComponent<Animator>();
 
+        playerRB.position = new Vector3(0, -100, 0);
     }
 
     public void SpawnPlayer()
     {
-        playerSpawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+        if (currentFloor == 0)
+        {
+            playerSpawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+            //player.transform.position = playerSpawnPoint.transform.position;
+            playerRB.position = playerSpawnPoint.transform.position;
+        }
+        else
+        {
+            bossElevator.Play("ElevatorNewLevel");
+            Debug.Log("Raise the roof!");
+        }
+    }
+
+    public void EnablePlayer()
+    {
+        Debug.Log("Player Enabled");
+
         //player.transform.position = playerSpawnPoint.transform.position;
-        playerRB.position = playerSpawnPoint.transform.position;
+        playerRB.position = new Vector3(0, 1, 0);
     }
 }
