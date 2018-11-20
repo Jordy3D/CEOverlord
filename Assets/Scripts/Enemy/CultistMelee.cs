@@ -12,6 +12,7 @@ public class CultistMelee : EnemyAttack
     {
         agent = GetComponent<NavMeshAgent>();
         hitbox = projectile.GetComponent<SphereCollider>();
+        state = Behaviour.Seek;
     }
     public override void Attack()
     {

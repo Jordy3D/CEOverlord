@@ -10,7 +10,7 @@ public class BossAttack : EnemyAttack{
 
 	// Use this for initialization
 	void Start () {
-		
+        state = Behaviour.Sentinal;
 	}
 	
 	

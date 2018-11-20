@@ -11,6 +11,12 @@ public class SpawnEnemies : MonoBehaviour
     GameObject enemyContainer;
     GameObject doors;
 
+    public bool isRandom;
+    public int minRandom, maxRandom;
+
+    public GameObject[] enemiesFixed;
+    public GameObject[] enemyPool;
+
     bool hasSpawned = false;
     // Use this for initialization
     void Start()
@@ -19,8 +25,9 @@ public class SpawnEnemies : MonoBehaviour
 
         enemyContainer = mommy.transform.Find("Enemies").gameObject;
         spawnpoints = mommy.transform.Find("EnemySpawns").GetComponentsInChildren<Transform>();
-        
+
         doors = mommy.transform.Find("Doors").gameObject;
+        isRandom = (Mathf.RoundToInt(Random.value) == 0);
     }
 
     private void Update()
@@ -36,11 +43,27 @@ public class SpawnEnemies : MonoBehaviour
         if (other.gameObject.tag == "Player" && hasSpawned == false)
         {
             Debug.Log("Ew you touched me");
-            for (int i = 0; i < spawnpoints.Length; i++)
+
+            //if random is enabled or if the length of fixed spawns is not equal to the amount of spawnpoints
+            if (isRandom || enemiesFixed.Length != spawnpoints.Length)
             {
-                Debug.Log("Spawned" + spawnee.name);
-                GameObject enemy = Instantiate(spawnee, spawnpoints[i].transform.position, spawnpoints[i].transform.rotation);
-                enemy.transform.parent = enemyContainer.transform;
+                for (int i = 1; i < spawnpoints.Length; i++)
+                {
+                    
+                    int index = Mathf.RoundToInt(Random.Range(0, enemyPool.Length - 1));
+
+                    GameObject enemy = Instantiate(enemyPool[index], spawnpoints[i].transform.position, spawnpoints[i].transform.rotation);
+                    enemy.transform.parent = enemyContainer.transform;
+                }
+            }
+            else
+            {
+                Debug.Log("Fixed");
+                for (int i = 1; i < spawnpoints.Length; i++)
+                {
+                    GameObject enemy = Instantiate(enemiesFixed[i], spawnpoints[i].transform.position, spawnpoints[i].transform.rotation);
+                    enemy.transform.parent = enemyContainer.transform;
+                }
             }
             hasSpawned = true;
             if (hasSpawned == true)

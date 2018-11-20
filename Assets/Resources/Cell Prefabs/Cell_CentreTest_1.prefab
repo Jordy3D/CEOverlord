@@ -863,7 +863,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1065040292695412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.327297, y: 7.27, z: -20.090849}
+  m_LocalPosition: {x: -4.712648, y: 11.239237, z: -6.3885117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4075874336432802}
@@ -1796,6 +1796,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnee: {fileID: 1014070144042980, guid: 3587fec22a808694aa80c48b4367989d, type: 2}
   spawnpoints: []
+  isRandom: 0
+  minRandom: 0
+  maxRandom: 0
+  enemiesFixed: []
+  enemyPool:
+  - {fileID: 1014070144042980, guid: 3587fec22a808694aa80c48b4367989d, type: 2}
+  - {fileID: 1014070144042980, guid: dea6653259f9d3448a762a6a5976284c, type: 2}
 --- !u!114 &114592043549784260
 MonoBehaviour:
   m_ObjectHideFlags: 1
