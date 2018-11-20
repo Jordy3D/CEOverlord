@@ -137,7 +137,7 @@ public class MapGen : MonoBehaviour
 
             //finalize position
             //create a new room at check pos, adding it to the 2d array with offset 
-            int roomType = Mathf.RoundToInt(Random.Range(0f, 2f));
+            int roomType = Mathf.RoundToInt(Random.Range(0f, 4f));
             rooms[(int)checkPos.x + gridSizeX, (int)checkPos.z + gridSizeZ] = new Room(checkPos, roomType);
             takenPositions.Insert(0, checkPos);
         }
