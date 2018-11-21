@@ -6,12 +6,17 @@ public class BasicGlove : Glove
 {
     public SphereCollider hitbox;
     bool isCoRunning;
+    public GameObject fist;
+    public Transform startP, endP;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
         
         hitbox = transform.GetChild(0).GetComponent<SphereCollider>();
-        
+        fist = hitbox.gameObject;
+        startP = transform.GetChild(1).GetComponent<Transform>();
+        endP = transform.GetChild(2).GetComponent<Transform>();
+
         comboLimit = 3;
         player.comboLimit = comboLimit;
         
@@ -23,6 +28,7 @@ public class BasicGlove : Glove
         Debug.Log("This is basic glove");
         //hitbox.gameObject.SetActive(true);
         hitbox.enabled = true;
+        StartCoroutine(PunchingLerp(0.2f));
         CallDeactivateHitbox();
     }
 
@@ -42,5 +48,22 @@ public class BasicGlove : Glove
             StopCoroutine(DeactivateHitbox());
         }
         StartCoroutine(DeactivateHitbox());
+    }
+
+    IEnumerator PunchingLerp(float punchTime)
+    {
+        float time = Time.time;
+        while (Time.time < time + punchTime / 2)
+        {
+            fist.transform.position = Vector3.Lerp(startP.transform.position, endP.transform.position, (Time.time - time) / (punchTime / 2));
+            yield return null;
+        }
+        time = Time.time;
+        while (Time.time < time + punchTime / 2)
+        {
+            fist.transform.position = Vector3.Lerp(endP.transform.position, startP.transform.position, (Time.time - time) / (punchTime / 2));
+            yield return null;
+        }
+        fist.transform.position = startP.transform.position;
     }
 }

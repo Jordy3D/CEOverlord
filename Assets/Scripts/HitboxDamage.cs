@@ -37,6 +37,7 @@ public class HitboxDamage : MonoBehaviour {
             shake.StartShake(shake.shakeDuration, shake.shakeForce);
             Rigidbody rb = other.GetComponent<Rigidbody>();
             rb.isKinematic = false;
+            rb.AddForce(other.transform.forward * -3f, ForceMode.Impulse);
             StartCoroutine(ResetKinematic(rb));
         }
     }
