@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 511267973}
   - component: {fileID: 511267972}
   - component: {fileID: 511267975}
+  - component: {fileID: 511267976}
   m_Layer: 0
   m_Name: Hit Test
   m_TagString: Untagged
@@ -323,6 +324,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1ed6cb53107ad40b45c610bf323458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  cameraShake: {fileID: 0}
+--- !u!114 &511267976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 511267970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0b1a1385ae0be41bfb2be59b5540aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  cameraShake: {fileID: 0}
+  shakeDuration: 2
+  shakeForce: 4
 --- !u!1 &622711086
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +648,7 @@ MonoBehaviour:
   seed: 0
   tries: 0
   takenPositions: []
-  numRooms: 3
+  numRooms: 5
   roomTypes:
   - {fileID: 1065040292695412, guid: e3653f796f85079449f3c0fbc3295ba1, type: 2}
   - {fileID: 1065040292695412, guid: 7c0a59c6dd8a92945adeec4567a4c8b0, type: 2}
@@ -773,6 +791,7 @@ GameObject:
   - component: {fileID: 2100027409}
   - component: {fileID: 2100027408}
   - component: {fileID: 2100027407}
+  - component: {fileID: 2100027410}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -840,3 +859,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 81.596, y: 0, z: 0}
+--- !u!114 &2100027410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2100027406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37876b7dab799047a48ccad654cdac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -31,7 +31,7 @@ public class BasicEnemy : MonoBehaviour
 
         curHealth = maxHealth;
         attackDelay = enemyAttack.delay;
-
+        
 
     }
 
@@ -117,6 +117,8 @@ public class BasicEnemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+   
 }
 
 public enum Behaviour

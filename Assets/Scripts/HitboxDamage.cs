@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class HitboxDamage : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject explosion; //The gameobject sauce of the shake
+
+    public CameraShake cameraShake; //The CameraShake component of the camera
+    TriggerShake shake;
+
+    // Use this for initialization
+    void Start()
+    {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+        shake = GetComponent<TriggerShake>();
+
+        explosion = this.gameObject;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,6 +31,19 @@ public class HitboxDamage : MonoBehaviour {
         {
             other.gameObject.GetComponent<BasicEnemy>().curHealth -= PlayerManager.damage;
             Debug.Log("Did " + PlayerManager.damage + " damage to enemy");
+
+            shake.cameraShake = cameraShake;
+            shake.explosion = explosion;
+            shake.StartShake(shake.shakeDuration, shake.shakeForce);
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            StartCoroutine(ResetKinematic(rb));
         }
+    }
+
+    IEnumerator ResetKinematic(Rigidbody rb)
+    {
+        yield return new WaitForSeconds(0.2f);
+        rb.isKinematic = true;
     }
 }
