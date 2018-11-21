@@ -7,6 +7,7 @@ public class GoToNextFloor : MonoBehaviour
     public GameObject player;
     public PlayerSpawn playerSpawn;
     public CurrentLevelStats level;
+
     // Use this for initialization
     void Start()
     {
