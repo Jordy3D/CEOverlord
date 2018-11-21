@@ -10,6 +10,8 @@ public abstract class Glove : MonoBehaviour
     public float damage;
     public int comboLimit;
     public float range;
+    public float coolDown;
+    public float comboWindow;
     public PlayerAttack player;
     
     public PlayerManager playerManager;

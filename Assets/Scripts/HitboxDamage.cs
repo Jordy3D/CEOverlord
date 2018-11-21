@@ -29,8 +29,7 @@ public class HitboxDamage : MonoBehaviour {
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<BasicEnemy>().curHealth -= PlayerManager.damage;
-            Debug.Log("Did " + PlayerManager.damage + " damage to enemy");
+            
 
             shake.cameraShake = cameraShake;
             shake.explosion = explosion;
@@ -39,12 +38,17 @@ public class HitboxDamage : MonoBehaviour {
             rb.isKinematic = false;
             rb.AddForce(other.transform.forward * -3f, ForceMode.Impulse);
             StartCoroutine(ResetKinematic(rb));
+            other.gameObject.GetComponent<BasicEnemy>().curHealth -= PlayerManager.damage;
+            Debug.Log("Did " + PlayerManager.damage + " damage to enemy");
         }
     }
 
     IEnumerator ResetKinematic(Rigidbody rb)
     {
         yield return new WaitForSeconds(0.2f);
-        rb.isKinematic = true;
+        if (rb)
+        {
+            rb.isKinematic = true;
+        }
     }
 }

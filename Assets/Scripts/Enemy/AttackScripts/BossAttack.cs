@@ -26,15 +26,18 @@ public class BossAttack : EnemyAttack{
         for (int i = 0; i < numProjectiles; i++)
         {
             Debug.Log(currentAngle);
-            float dirX = startPoint.x + Mathf.Sin((currentAngle * Mathf.PI) / 180) * radius;
-            float dirY = startPoint.y + Mathf.Cos((currentAngle * Mathf.PI) / 180) * radius;
-            Vector3 shotDir = new Vector3(dirX, dirY, 0f);
-            Vector3 shotMoveDir = (shotDir - startPoint).normalized;
+            float x = Mathf.Sin(currentAngle * Mathf.Deg2Rad);
+            float y = Mathf.Cos(currentAngle * Mathf.Deg2Rad);
+            float dirX = x * radius;
+            float dirY = y * radius;
+            Vector3 shotDir = new Vector3(dirX, 0f, dirY);
+            Vector3 shotMoveDir = (shotDir).normalized;
 
             GameObject clone = Instantiate(projectile, startPoint, Quaternion.identity);
             EnemyProjectile newProjectile = clone.GetComponent<EnemyProjectile>();
 
-            newProjectile.Fire(new Vector3(shotMoveDir.x, 0, shotMoveDir.y));
+            print(new Vector3(shotMoveDir.x, 0f, shotMoveDir.z));
+            newProjectile.Fire(new Vector3(shotMoveDir.x, 0, shotMoveDir.z));
             
             currentAngle += angleStep;
             

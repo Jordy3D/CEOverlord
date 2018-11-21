@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     public float stamina;
     public float regenRate;
     public bool canRegen = true;
+    public bool canMove = true;
     bool isCoRunning = false;
 
     PlayerStats stats;

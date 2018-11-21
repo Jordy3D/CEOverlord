@@ -50,62 +50,65 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     public void FixedUpdate()
     {
-        
 
-        float inputH = Input.GetAxis("Horizontal") * moveSpeed;
-        float inputV = Input.GetAxis("Vertical") * moveSpeed;
-
-
-        Vector3 moveDir = new Vector3(inputH, 0f, inputV) * moveSpeed;
-        Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
-
-        //if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
-        //{
-        //    playerRB.AddForce(force * 10f, ForceMode.Impulse);
-
-        //    Vector3 newPosition = force * 10f;
-        //    // Use new position to lerp
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && playerManager.stamina > 0 && !isDashing)
+        if (playerManager.canMove)
         {
-            playerRB.velocity = Vector3.zero;
-            isInputAllowed = false;
-            playerRB.AddForce(force.normalized * 20f, ForceMode.Impulse);
-            StartCoroutine(EnableInput(0.1f));
-            playerManager.stamina -= 20f;
-            if (playerManager.stamina < 0)
+
+            float inputH = Input.GetAxis("Horizontal") * moveSpeed;
+            float inputV = Input.GetAxis("Vertical") * moveSpeed;
+
+
+            Vector3 moveDir = new Vector3(inputH, 0f, inputV) * moveSpeed;
+            Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
+
+            //if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
+            //{
+            //    playerRB.AddForce(force * 10f, ForceMode.Impulse);
+
+            //    Vector3 newPosition = force * 10f;
+            //    // Use new position to lerp
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && playerManager.stamina > 0 && !isDashing)
             {
-                playerManager.stamina = 0;
-                Debug.Log("Out of stamina");
-            }
-            playerManager.canRegen = false;
+                playerRB.velocity = Vector3.zero;
+                playerManager.canMove = false;
+                playerRB.AddForce(force.normalized * 20f, ForceMode.Impulse);
+                StartCoroutine(EnableInput(0.1f));
+                playerManager.stamina -= 20f;
+                if (playerManager.stamina < 0)
+                {
+                    playerManager.stamina = 0;
+                    Debug.Log("Out of stamina");
+                }
+                playerManager.canRegen = false;
 
-            
-
-            playerManager.CallRegenStam();
 
 
-            // Coroutine to set "isInputAllowed" to false
+                playerManager.CallRegenStam();
+
+
+                // Coroutine to set "isInputAllowed" to false
                 // Sets bool back to true after a few milliseconds
 
-            //isDashing = true;
-        }
+                //isDashing = true;
+            }
 
-        /*
-        if (isDashing)
-        {
-            force = force * 2f;
-            dashTime += Time.deltaTime; 
-        }
-        */
+            /*
+            if (isDashing)
+            {
+                force = force * 2f;
+                dashTime += Time.deltaTime; 
+            }
+            */
 
-        // Make bool called:
-        if(isInputAllowed)
-            playerRB.velocity = force;
+            // Make bool called:
+            if (isInputAllowed)
+                playerRB.velocity = force;
 
-        if (playerRB.velocity != Vector3.zero)
-        {
-            playerRB.rotation = Quaternion.LookRotation(playerRB.velocity);
+            if (playerRB.velocity != Vector3.zero)
+            {
+                playerRB.rotation = Quaternion.LookRotation(playerRB.velocity);
+            } 
         }
         
     }
@@ -133,6 +136,6 @@ public class CharacterMovement : MonoBehaviour
     public IEnumerator EnableInput(float delay)
     {
         yield return new WaitForSeconds(delay);
-        isInputAllowed = true;
+        playerManager.canMove = true;
     }
 }

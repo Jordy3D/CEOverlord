@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     public Glove thingGloves;
     public GameObject hitbox;
     IEnumerator instance;
-    
+
     #endregion
     // Use this for initialization
     void Start()
@@ -29,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
 
     // Update is called once per frame
 
-        //adjust later to only allow for hits past certain points in animation
+    //adjust later to only allow for hits past certain points in animation
     void Update()
     {
         /*if (isCoolDown)
@@ -46,24 +46,27 @@ public class PlayerAttack : MonoBehaviour
         if (isCombo)
         {
             time += Time.deltaTime;
-            if(time >= comboTimeLimit)
+            if (time >= comboTimeLimit)
             {
                 isCombo = false;
                 comboPos = 0;
                 Debug.Log("Combo Dropped");
-                
+                playerManager.canMove = true;
+
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(comboPos < comboLimit && canCombo && playerManager.stamina != 0)
+
+            if (comboPos < comboLimit && canCombo && playerManager.stamina != 0)
             {
                 if (comboPos == 0)
                 {
                     isCombo = true;
                     time = 0;
                     Debug.Log("Combo started");
+                    playerManager.canMove = false;
                 }
 
                 playerGlove.Attack();
@@ -71,8 +74,8 @@ public class PlayerAttack : MonoBehaviour
                 playerManager.stamina -= 5f;
                 playerManager.canRegen = false;
                 playerManager.CallRegenStam();
-                
-                if(comboPos == comboLimit)
+
+                if (comboPos == comboLimit)
                 {
                     isCombo = false;
 
@@ -81,7 +84,9 @@ public class PlayerAttack : MonoBehaviour
                     time = 0;
                     comboPos = 0;
                     Debug.Log("Combo Finished");
-                } else
+                    playerManager.canMove = true;
+                }
+                else
                 {
                     time = 0;
                 }
