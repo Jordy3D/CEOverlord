@@ -102,7 +102,7 @@ public class CharacterMovement : MonoBehaviour
             */
 
             // Make bool called:
-            if (isInputAllowed)
+            if (playerManager.canMove)
                 playerRB.velocity = force;
 
             if (playerRB.velocity != Vector3.zero)

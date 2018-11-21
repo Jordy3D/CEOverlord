@@ -45,8 +45,9 @@ public class PlayerAttack : MonoBehaviour
         */
         if (isCombo)
         {
+            
             time += Time.deltaTime;
-            if (time >= comboTimeLimit)
+            if (time >= comboTimeLimit || Input.GetKeyDown(KeyCode.LeftShift))
             {
                 isCombo = false;
                 comboPos = 0;

@@ -19,7 +19,7 @@ public class BasicGlove : Glove
 
         comboLimit = 3;
         coolDown = 0.5f;
-        comboWindow = 0.2f;
+        comboWindow = 0.5f;
         player.comboLimit = comboLimit;
         player.comboTimeLimit = comboWindow;
         player.coolDownLimit = coolDown;
