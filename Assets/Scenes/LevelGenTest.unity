@@ -518,6 +518,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerRB: {fileID: 0}
   playerSpawnPoint: {fileID: 0}
+  currentFloor: 0
 --- !u!114 &622711097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +630,7 @@ MonoBehaviour:
   seed: 0
   tries: 0
   takenPositions: []
-  numRooms: 5
+  numRooms: 3
   roomTypes:
   - {fileID: 1065040292695412, guid: e3653f796f85079449f3c0fbc3295ba1, type: 2}
   - {fileID: 1065040292695412, guid: 7c0a59c6dd8a92945adeec4567a4c8b0, type: 2}

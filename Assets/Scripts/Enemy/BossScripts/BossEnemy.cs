@@ -22,6 +22,7 @@ public class BossEnemy : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        attacks = GetComponents<EnemyAttack>();
     }
 
     // Update is called once per frame
@@ -53,8 +54,14 @@ public class BossEnemy : MonoBehaviour
                     radialAttack.CallMulti(5);
                     canAct = false;
                 }
+                else if (currentAttack.GetComponent<BossCharge>())
+                {
+                    BossCharge chargeAttack = currentAttack.GetComponent<BossCharge>();
+                    chargeAttack.Attack();
+                    canAct = false;
+                }
 
-            } 
+            }
         }
     }
 

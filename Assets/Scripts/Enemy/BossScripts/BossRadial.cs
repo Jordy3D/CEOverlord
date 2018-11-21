@@ -10,7 +10,7 @@ public class BossRadial : EnemyAttack {
 
     private void Start()
     {
-        boss = transform.parent.GetComponent<BossEnemy>();
+        boss = GetComponent<BossEnemy>();
         
         
     }
