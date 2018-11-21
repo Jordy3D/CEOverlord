@@ -11,41 +11,24 @@ public class PlayerSpawn : MonoBehaviour
 
     public int currentFloor;
 
-    public Animator spawnElevator;
-
-    public CurrentLevelStats level;
-
+    Animator bossElevator;
 
     // Use this for initialization
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerRB = player.GetComponent<Rigidbody>();
-
-        playerRB.position = new Vector3(0, -100, 0);
-
-        //bossElevator = GameObject.FindGameObjectWithTag("SpawnElevator").GetComponent<Animator>();
     }
 
     private void Start()
     {
-        
-        level = GameObject.Find("CurrentLevelManager").GetComponent<CurrentLevelStats>();
-        currentFloor = level.currentLevel;
+        bossElevator = GameObject.FindGameObjectWithTag("SpawnElevator").GetComponent<Animator>();
 
-        spawnElevator = GameObject.FindGameObjectWithTag("SpawnElevator").GetComponent<Animator>();
-
-        if (currentFloor != level.currentLevel)
-        {
-            currentFloor = level.currentLevel;
-        }
+        playerRB.position = new Vector3(0, -100, 0);
     }
 
     public void SpawnPlayer()
     {
-        spawnElevator = GameObject.FindGameObjectWithTag("SpawnElevator").GetComponent<Animator>();
-
-        Debug.Log("Spawning the player into " + currentFloor);
         if (currentFloor == 0)
         {
             playerSpawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
@@ -54,18 +37,8 @@ public class PlayerSpawn : MonoBehaviour
         }
         else
         {
-            spawnElevator = GameObject.FindGameObjectWithTag("SpawnElevator").GetComponent<Animator>();
-
-            spawnElevator.Play("ElevatorNewLevel");
+            bossElevator.Play("ElevatorNewLevel");
             Debug.Log("Raise the roof!");
-        }
-    }
-
-    private void Update()
-    {
-        if (currentFloor != level.currentLevel)
-        {
-            currentFloor = level.currentLevel;
         }
     }
 
