@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-
+    
     #region Vars
     public static float damage;
 
@@ -21,9 +21,8 @@ public class PlayerManager : MonoBehaviour
 
     PlayerStats stats;
     CharacterMovement movementStats;
-    DisplayStats display; 
+    DisplayStats display;
     #endregion
-
     // Use this for initialization
     void Start()
     {

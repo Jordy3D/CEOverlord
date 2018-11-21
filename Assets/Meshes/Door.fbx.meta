@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bcdae8ea031998c44a4eab5233872144
+guid: 312313d46762f7e4e9ff756541164c2d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,7 +11,8 @@ ModelImporter:
     400002: DoorFrame
     400004: LeftDoor
     400006: RightDoor
-    2100000: lambert1
+    2100000: Door
+    2100002: Lamp
     2300000: DoorFrame
     2300002: LeftDoor
     2300004: RightDoor
