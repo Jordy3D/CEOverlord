@@ -20,7 +20,7 @@ public class CurrentLevelStats : MonoBehaviour
     {
         if (currentFloorText.text != "Ground")
         {
-            if (currentFloorText.text != currentLevel.ToString())
+            if (!(currentFloorText.text.Contains(currentLevel.ToString())))
             {
                 UpdateDisplay();
             }
