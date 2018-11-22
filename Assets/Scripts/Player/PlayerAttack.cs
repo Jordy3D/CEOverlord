@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     PlayerManager playerManager;
 
     public Glove thingGloves;
-    public GameObject hitbox;
+    public HitboxDamage hitbox;
     IEnumerator instance;
 
     #endregion
@@ -24,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
     {
         playerGlove = transform.GetChild(0).GetComponent<Glove>();
         playerManager = GetComponent<PlayerManager>();
+        hitbox = playerGlove.transform.GetChild(0).GetComponent<HitboxDamage>();
         thingGloves = null;
     }
 
@@ -50,10 +51,12 @@ public class PlayerAttack : MonoBehaviour
             if (time >= comboTimeLimit)
             {
                 isCombo = false;
+                canCombo = false;
                 comboPos = 0;
                 Debug.Log("Combo Dropped");
                 playerManager.canMove = true;
-                canCombo = true;
+                instance = CoolDown(coolDownLimit);
+                CallCoolDown(instance);
 
             }
         }
@@ -63,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (comboPos < comboLimit && canCombo && playerManager.stamina != 0)
             {
- 
+                
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 if (comboPos == 0)
                 {
@@ -73,7 +76,7 @@ public class PlayerAttack : MonoBehaviour
                     playerManager.canMove = false;
                 }
 
-                playerGlove.Attack();
+                
                 comboPos++;
                 playerManager.stamina -= 5f;
                 playerManager.canRegen = false;
@@ -92,11 +95,14 @@ public class PlayerAttack : MonoBehaviour
                     Debug.Log("Combo Finished");
 
                     playerManager.canMove = true;
+                    hitbox.currentKnockBack *= 3;
                 }
                 else
                 {
                     time = 0;
                 }
+                //actually attack now
+                playerGlove.Attack();
             }
         }
 

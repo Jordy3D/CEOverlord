@@ -162,6 +162,11 @@ Prefab:
       propertyPath: shakeForce
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114523188991585094, guid: 5f132f1720fa64144a433174ef2fab57,
+        type: 2}
+      propertyPath: dontDestroy
+      value: 
+      objectReference: {fileID: 2010040275}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f132f1720fa64144a433174ef2fab57, type: 2}
   m_IsPrefabAsset: 0
@@ -1759,6 +1764,34 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 746189015}
   m_CullTransparentMesh: 0
+--- !u!1 &775331583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1337348634}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 775331584}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &775331584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1337348634}
+  m_GameObject: {fileID: 775331583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &896624302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,7 +3210,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2010040275}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7672c2e2a8d1d045b496d2355adee66, type: 3}
   m_Name: 

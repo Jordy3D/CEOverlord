@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class PlayerManager : MonoBehaviour
 
     PlayerStats stats;
     CharacterMovement movementStats;
-    DisplayStats display; 
+    DisplayStats display;
+    public GameObject dontDestroy;
     #endregion
 
     // Use this for initialization
@@ -134,7 +136,9 @@ public class PlayerManager : MonoBehaviour
 
     void EndGame()
     {
-
+        dontDestroy.GetComponent<PermanentObject>().enabled = false;
+        Destroy(dontDestroy);
+        SceneManager.LoadScene("God");
     }
 
 }

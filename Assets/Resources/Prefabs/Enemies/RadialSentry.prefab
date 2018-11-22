@@ -97,7 +97,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnP
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
@@ -231,6 +231,7 @@ MonoBehaviour:
   me: {fileID: 0}
   player: {fileID: 0}
   enemyAttack: {fileID: 0}
+  agentTarget: {x: 0, y: 0, z: 0}
   health: 10
   canFire: 1
   timer: 0
@@ -254,7 +255,7 @@ MonoBehaviour:
   projectile: {fileID: 1578936306318158, guid: 5a76e8b0408ff8e4db22ea47fac2dfdb, type: 2}
   delay: 2
   state: 0
-  numProjectiles: 5
+  numProjectiles: 8
   radius: 2
 --- !u!114 &114598488169095150
 MonoBehaviour:

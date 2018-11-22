@@ -174,6 +174,10 @@ public class CharacterMovement : MonoBehaviour
 
         lookDir = new Vector3(x, 0, z).normalized;
        // Vector3 potentialDir = new Vector3(x, 0, z).normalized;
+       if(lookDir == Vector3.zero)
+        {
+            lookDir.z = -1f;
+        }
 
     }
 }

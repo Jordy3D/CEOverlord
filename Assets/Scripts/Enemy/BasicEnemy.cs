@@ -9,7 +9,8 @@ public class BasicEnemy : MonoBehaviour
     public NavMeshAgent me;
     public Transform player;
     public EnemyAttack enemyAttack;
-    public float health = 10f;
+    public Vector3 agentTarget;
+    public float health = 5f;
     public bool canFire = true;
     public float timer = 0f;
     public float attackDelay;
@@ -31,7 +32,7 @@ public class BasicEnemy : MonoBehaviour
 
         curHealth = maxHealth;
         attackDelay = enemyAttack.delay;
-        
+
 
     }
 
@@ -48,16 +49,10 @@ public class BasicEnemy : MonoBehaviour
             }
         }
         #region PossibleStateCode
-        /*
-        
-        if (state == Behaviour.Seek)
+        if (enemyAttack.GetComponent<CultistMelee>())
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) > 1f)
-            {
-                me.SetDestination(player.position);
-            }
-
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= 1f)
+            agentTarget = player.position;
+            if (Vector3.Distance(transform.position, player.position) < 1f)
             {
                 if (canFire)
                 {
@@ -65,46 +60,42 @@ public class BasicEnemy : MonoBehaviour
                     canFire = false;
                 }
             }
-
         }
-        else if (state == Behaviour.Flee)
+        else if (enemyAttack.GetComponent<CultistAttack>())
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= 3f)
-            {
-                // me.SetDestination(player.position);
-                me.SetDestination((this.transform.position - player.transform.position) * 3f);
-            }
-
-            if (Vector3.Distance(this.transform.position, player.transform.position) > 3f)
-            {
-                me.SetDestination(player.transform.position);
-
-            }
-
+            Vector3 vel = player.position - transform.position;
+            vel.Normalize();
+            Vector3 moveDir = vel * -1 * me.speed;
+            agentTarget = transform.position + moveDir * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(player.position, Vector3.up);
             if (canFire)
             {
                 enemyAttack.Attack();
                 canFire = false;
             }
         }
-        else if (state == Behaviour.Sentinal)
+        else if (enemyAttack.GetComponent<BossAttack>())
         {
+            if (canFire)
+            {
+                enemyAttack.Attack();
+                canFire = false;
+            }
+        }
 
-        } 
-        */
         #endregion
 
 
-        if (canFire)
-        {
-            enemyAttack.Attack();
-            canFire = false;
-        }
+        //if (canFire)
+        //{
+        //    enemyAttack.Attack();
+        //    canFire = false;
+        //}
 
         if (health > 0)
         {
             healthBar.fillAmount = curHealth / maxHealth;
-            me.SetDestination(player.position);
+            me.SetDestination(agentTarget);
         }
 
         if (curHealth < 0)
@@ -118,7 +109,7 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-   
+
 }
 
 public enum Behaviour
