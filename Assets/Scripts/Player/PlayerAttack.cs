@@ -45,14 +45,15 @@ public class PlayerAttack : MonoBehaviour
         */
         if (isCombo)
         {
-            
+
             time += Time.deltaTime;
-            if (time >= comboTimeLimit || Input.GetKeyDown(KeyCode.LeftShift))
+            if (time >= comboTimeLimit)
             {
                 isCombo = false;
                 comboPos = 0;
                 Debug.Log("Combo Dropped");
                 playerManager.canMove = true;
+                canCombo = true;
 
             }
         }
@@ -62,6 +63,8 @@ public class PlayerAttack : MonoBehaviour
 
             if (comboPos < comboLimit && canCombo && playerManager.stamina != 0)
             {
+ 
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
                 if (comboPos == 0)
                 {
                     isCombo = true;
@@ -79,12 +82,15 @@ public class PlayerAttack : MonoBehaviour
                 if (comboPos == comboLimit)
                 {
                     isCombo = false;
+                    canCombo = false;
 
                     instance = CoolDown(coolDownLimit);
                     CallCoolDown(instance);
+
                     time = 0;
                     comboPos = 0;
                     Debug.Log("Combo Finished");
+
                     playerManager.canMove = true;
                 }
                 else
@@ -92,6 +98,17 @@ public class PlayerAttack : MonoBehaviour
                     time = 0;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isCombo)
+        {
+            playerManager.canMove = true;
+            Vector3 force = GetComponent<CharacterMovement>().GetMoveDir();
+            GetComponent<CharacterMovement>().Dash(force);
+            isCombo = false;
+            comboPos = 0;
+            Debug.Log("Combo Dropped");
+            
         }
     }
 

@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     public bool isInputAllowed = true;
 
     public PlayerStats stats;
+    public Vector3 lookDir;
     PlayerManager playerManager;
 
     
@@ -31,6 +32,7 @@ public class CharacterMovement : MonoBehaviour
         //main camera is equal to the camera in the scene
         playerManager = GetComponent<PlayerManager>();
         stats = GetComponent<PlayerStats>();
+        
         //UpdateStats();
     }
 
@@ -46,6 +48,9 @@ public class CharacterMovement : MonoBehaviour
                 dashTime = 0;
             }
         }
+
+        GetLookDir();
+        transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
     }
     // Update is called once per frame
     public void FixedUpdate()
@@ -53,62 +58,27 @@ public class CharacterMovement : MonoBehaviour
 
         if (playerManager.canMove)
         {
-
-            float inputH = Input.GetAxis("Horizontal") * moveSpeed;
-            float inputV = Input.GetAxis("Vertical") * moveSpeed;
-
-
-            Vector3 moveDir = new Vector3(inputH, 0f, inputV) * moveSpeed;
-            Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
-
-            //if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 0)
-            //{
-            //    playerRB.AddForce(force * 10f, ForceMode.Impulse);
-
-            //    Vector3 newPosition = force * 10f;
-            //    // Use new position to lerp
+            Vector3 force = GetMoveDir();
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && playerManager.stamina > 0 && !isDashing)
             {
-                playerRB.velocity = Vector3.zero;
-                playerManager.canMove = false;
-                playerRB.AddForce(force.normalized * 20f, ForceMode.Impulse);
-                StartCoroutine(EnableInput(0.1f));
-                playerManager.stamina -= 20f;
-                if (playerManager.stamina < 0)
-                {
-                    playerManager.stamina = 0;
-                    Debug.Log("Out of stamina");
-                }
-                playerManager.canRegen = false;
 
+                Dash(force);
 
-
-                playerManager.CallRegenStam();
-
-
-                // Coroutine to set "isInputAllowed" to false
-                // Sets bool back to true after a few milliseconds
-
-                //isDashing = true;
             }
 
-            /*
-            if (isDashing)
-            {
-                force = force * 2f;
-                dashTime += Time.deltaTime; 
-            }
-            */
+           
 
             // Make bool called:
             if (playerManager.canMove)
                 playerRB.velocity = force;
 
-            if (playerRB.velocity != Vector3.zero)
+            /*
+            if (playerRB.velocity != Vector3.zero && (Input.GetAxis("VerLook") == 0 || Input.GetAxis("HorLook") == 0))
             {
                 playerRB.rotation = Quaternion.LookRotation(playerRB.velocity);
             } 
+            */
         }
         
     }
@@ -137,5 +107,73 @@ public class CharacterMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         playerManager.canMove = true;
+    }
+
+    public void Dash(Vector3 force)
+    {
+        playerRB.velocity = Vector3.zero;
+        playerManager.canMove = false;
+        playerRB.AddForce(force.normalized * 20f, ForceMode.Impulse);
+        StartCoroutine(EnableInput(0.1f));
+        playerManager.stamina -= 20f;
+        if (playerManager.stamina < 0)
+        {
+            playerManager.stamina = 0;
+            Debug.Log("Out of stamina");
+        }
+        playerManager.canRegen = false;
+
+
+
+        playerManager.CallRegenStam();
+    }
+
+    public Vector3 GetMoveDir()
+    {
+        float inputH = Input.GetAxis("HorMovement") * moveSpeed;
+        float inputV = Input.GetAxis("VerMovement") * moveSpeed;
+
+
+        Vector3 moveDir = new Vector3(inputH, 0f, inputV) * moveSpeed;
+        Vector3 force = new Vector3(moveDir.x, playerRB.velocity.y, moveDir.z);
+        return force;
+    }
+
+    public void GetLookDir()
+    {
+        float x = Input.GetAxis("HorLook");
+        float z = Input.GetAxis("VerLook");
+
+        if (x > 0)
+        {
+            x = 1;
+        }
+        if (x < 0)
+        {
+            x = -1;
+        }
+        //Run this zero check after applying X direction
+        if ((x < 1 && x > 0) || (x > -1 && x < 0))
+        {
+            x = 0;
+        }
+        ///////////////////////////
+        if (z > 0)
+        {
+            z = 1;
+        }
+        if (z < 0)
+        {
+            z = -1;
+        }
+        //Run this zero check after applying Z direction
+        if ((z < 1 && z > 0) || (z > -1 && z < 0))
+        {
+            z = 0;
+        }
+
+        lookDir = new Vector3(x, 0, z).normalized;
+       // Vector3 potentialDir = new Vector3(x, 0, z).normalized;
+
     }
 }

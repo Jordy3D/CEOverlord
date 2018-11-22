@@ -30,12 +30,12 @@ public class BossRadial : EnemyAttack {
             float dirX = x * radius;
             float dirY = y * radius;
             Vector3 shotDir = new Vector3(dirX, 0f, dirY);
-            Vector3 shotMoveDir = (shotDir).normalized;
+            
 
             GameObject clone = Instantiate(projectile, startPoint, Quaternion.identity);
             EnemyProjectile newProjectile = clone.GetComponent<EnemyProjectile>();
 
-            newProjectile.Fire(new Vector3(shotMoveDir.x, 0, shotMoveDir.y));
+            newProjectile.Fire(shotDir.normalized);
 
             currentAngle += angleStep;
 

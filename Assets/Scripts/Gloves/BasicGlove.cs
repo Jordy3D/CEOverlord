@@ -18,8 +18,8 @@ public class BasicGlove : Glove
         endP = transform.GetChild(2).GetComponent<Transform>();
 
         comboLimit = 3;
-        coolDown = 0.5f;
-        comboWindow = 0.5f;
+        coolDown = 1f;
+        comboWindow = 0.3f;
         player.comboLimit = comboLimit;
         player.comboTimeLimit = comboWindow;
         player.coolDownLimit = coolDown;
