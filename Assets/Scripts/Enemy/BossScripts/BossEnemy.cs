@@ -48,16 +48,16 @@ public class BossEnemy : MonoBehaviour
                 currentAttack = attacks[attackIndex];
                 canAttack = false;
                 delay = currentAttack.delay;
-                if (currentAttack.GetComponent<BossRadial>())
-                {
-                    BossRadial radialAttack = currentAttack.GetComponent<BossRadial>();
-                    radialAttack.CallMulti(5);
-                    canAct = false;
-                }
-                else if (currentAttack.GetComponent<BossCharge>())
+                if (currentAttack.GetComponent<BossCharge>())
                 {
                     BossCharge chargeAttack = currentAttack.GetComponent<BossCharge>();
                     chargeAttack.Attack();
+                    canAct = false;
+                }
+                else if (currentAttack.GetComponent<BossRadial>())
+                {
+                    BossRadial radialAttack = currentAttack.GetComponent<BossRadial>();
+                    radialAttack.CallMulti(5);
                     canAct = false;
                 }
 

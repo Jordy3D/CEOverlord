@@ -23,37 +23,56 @@ public class CultistMelee : EnemyAttack
     public override void Attack()
     {
         agent.isStopped = true;
-        hitbox.enabled = true;
-        StartCoroutine(punchingLerp(0.2f));
-        StartCoroutine(DeactivateHitbox());
+        
+        StartCoroutine(ChargingAttack());
+        
+        //StartCoroutine(DeactivateHitbox());
 
     }
 
     
 
-    IEnumerator DeactivateHitbox()
-    {
+   
 
-        yield return new WaitForSeconds(0.4f);
-        //hitbox.gameObject.SetActive(false);
-        hitbox.enabled = false;
-        agent.isStopped = false;
-    }
-
-    IEnumerator punchingLerp(float punchTime)
+    IEnumerator PunchingLerp(float punchTime)
     {
+        //enable the hitbox for the attack
+        hitbox.enabled = true;
+        //the current time
         float time = Time.time;
+        //while the current time is less that our saved time + half the time it takes to punch
         while(Time.time < time + punchTime/2)
         {
+            //lerp the punch outwards
             fist.transform.position = Vector3.Lerp(startP.transform.position, endP.transform.position, (Time.time - time) / (punchTime/2));
             yield return null;
         }
+        //resave the time
         time = Time.time;
+        //do same as above but for returning the punch
         while (Time.time < time + punchTime / 2)
         {
             fist.transform.position = Vector3.Lerp(endP.transform.position, startP.transform.position, (Time.time - time) / (punchTime / 2));
             yield return null;
         }
+        //set punch back to start pos for good measure
         fist.transform.position = startP.transform.position;
+        //turn off hitbox
+        DeactivateHitboxF();
+    }
+
+    IEnumerator ChargingAttack()
+    {
+        Color normalColour = this.gameObject.GetComponent<Renderer>().material.color;
+        this.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        yield return new WaitForSeconds(0.3f);
+        this.gameObject.GetComponent<Renderer>().material.SetColor("_Color", normalColour);
+        StartCoroutine(PunchingLerp(0.2f));
+    }
+
+    void DeactivateHitboxF()
+    {
+        hitbox.enabled = false;
+        agent.isStopped = false;
     }
 }

@@ -15,4 +15,6 @@ public class BasicProjectile : EnemyProjectile {
         }
         Destroy(this.gameObject);
     }
+
+   
 }

@@ -81,6 +81,7 @@ public class BossRadial : EnemyAttack {
             angleShift += shift;
             yield return new WaitForSeconds(0.7f); 
         }
+        
         boss.canAct = true;
     }
 

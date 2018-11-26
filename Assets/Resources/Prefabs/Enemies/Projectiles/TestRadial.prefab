@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114230266818145362}
   m_Layer: 0
   m_Name: TestRadial
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   projectile: {fileID: 54411857570656140}
-  speed: 10
+  speed: 3
 --- !u!135 &135197301101009798
 SphereCollider:
   m_ObjectHideFlags: 1

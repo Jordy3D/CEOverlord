@@ -52,8 +52,9 @@ public class BasicEnemy : MonoBehaviour
         if (enemyAttack.GetComponent<CultistMelee>())
         {
             agentTarget = player.position;
-            if (Vector3.Distance(transform.position, player.position) < 1f)
+            if (Vector3.Distance(transform.position, player.position) < 2f)
             {
+                //will rig enemy attack with a delay before punching to warn player
                 if (canFire)
                 {
                     enemyAttack.Attack();
@@ -65,9 +66,10 @@ public class BasicEnemy : MonoBehaviour
         {
             Vector3 vel = player.position - transform.position;
             vel.Normalize();
-            Vector3 moveDir = vel * -1 * me.speed;
+            Vector3 moveDir = vel * -1;
             agentTarget = transform.position + moveDir * Time.deltaTime;
-            transform.rotation = Quaternion.LookRotation(player.position, Vector3.up);
+            
+            //transform.rotation = Quaternion.LookRotation(new Vector3(player.position.x, 0f, player.position.z), Vector3.up);
             if (canFire)
             {
                 enemyAttack.Attack();
@@ -86,11 +88,7 @@ public class BasicEnemy : MonoBehaviour
         #endregion
 
 
-        //if (canFire)
-        //{
-        //    enemyAttack.Attack();
-        //    canFire = false;
-        //}
+        
 
         if (health > 0)
         {
