@@ -327,7 +327,7 @@ public class MapGen : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Random.seed.ToString());
+       // Debug.Log(Random.seed.ToString());
     }
 
     void FindBossRoom()

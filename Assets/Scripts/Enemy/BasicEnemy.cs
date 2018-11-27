@@ -17,6 +17,7 @@ public class BasicEnemy : MonoBehaviour
     public Behaviour state;
     public float maxHealth = 10f;
     public float curHealth;
+    public bool canAct = true;
 
 
     public Image healthBar;
@@ -49,40 +50,43 @@ public class BasicEnemy : MonoBehaviour
             }
         }
         #region PossibleStateCode
-        if (enemyAttack.GetComponent<CultistMelee>())
+        if (canAct)
         {
-            agentTarget = player.position;
-            if (Vector3.Distance(transform.position, player.position) < 2f)
+            if (enemyAttack.GetComponent<CultistMelee>())
             {
-                //will rig enemy attack with a delay before punching to warn player
+                agentTarget = player.position;
+                if (Vector3.Distance(transform.position, player.position) < 2f)
+                {
+                    //will rig enemy attack with a delay before punching to warn player
+                    if (canFire)
+                    {
+                        enemyAttack.Attack();
+                        canFire = false;
+                    }
+                }
+            }
+            else if (enemyAttack.GetComponent<CultistAttack>())
+            {
+                Vector3 vel = player.position - transform.position;
+                vel.Normalize();
+                Vector3 moveDir = vel * -1;
+                agentTarget = transform.position + moveDir * Time.deltaTime;
+
+                //transform.rotation = Quaternion.LookRotation(new Vector3(player.position.x, 0f, player.position.z), Vector3.up);
                 if (canFire)
                 {
                     enemyAttack.Attack();
                     canFire = false;
                 }
             }
-        }
-        else if (enemyAttack.GetComponent<CultistAttack>())
-        {
-            Vector3 vel = player.position - transform.position;
-            vel.Normalize();
-            Vector3 moveDir = vel * -1;
-            agentTarget = transform.position + moveDir * Time.deltaTime;
-            
-            //transform.rotation = Quaternion.LookRotation(new Vector3(player.position.x, 0f, player.position.z), Vector3.up);
-            if (canFire)
+            else if (enemyAttack.GetComponent<BossAttack>())
             {
-                enemyAttack.Attack();
-                canFire = false;
-            }
-        }
-        else if (enemyAttack.GetComponent<BossAttack>())
-        {
-            if (canFire)
-            {
-                enemyAttack.Attack();
-                canFire = false;
-            }
+                if (canFire)
+                {
+                    enemyAttack.Attack();
+                    canFire = false;
+                }
+            } 
         }
 
         #endregion

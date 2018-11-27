@@ -12,6 +12,8 @@ public class HitboxDamage : MonoBehaviour
     TriggerShake shake;
     public float currentKnockBack;
     float deafaultKnockBack = 5f;
+    IEnumerator instance;
+    bool isRunning;
 
     // Use this for initialization
     void Start()
@@ -45,28 +47,49 @@ public class HitboxDamage : MonoBehaviour
         }
     }
 
+
+    //this might be the problem
     IEnumerator ResetKinematic(Rigidbody rb, Vector3 vel)
     {
-        float time = Time.time;
-        Vector3 destination = vel * 0.2f;
-        Vector3 startPos = rb.position;
-        while (Time.time < time + 0.2f)
-        {
-            rb.position = Vector3.Lerp(startPos, destination, (Time.time - time) / 0.2f);
-            yield return null;
-        }
-        
+        //float time = Time.time;
+        //Vector3 destination = transform.position + vel * 0.2f;
+        //Debug.Log(destination + "Is predicted destination");
+        //Vector3 startPos = rb.position;
+        //while (Time.time < time + 0.2f)
+        //{
+        //    rb.position = Vector3.Lerp(startPos, destination, (Time.time - time) / 0.2f);
+        //    yield return null;
+        //}
+        isRunning = true;
+        yield return new WaitForSeconds(0.2f);
         rb.isKinematic = true;
+        rb.GetComponent<BasicEnemy>().canAct = true;
+        isRunning = false;
 
     }
 
     public void KnockBack(float forceMultiplier, GameObject enemy)
     {
+        enemy.GetComponent<BasicEnemy>().canAct = false;
         Rigidbody rb = enemy.GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.AddForce(enemy.transform.forward * currentKnockBack * -1, ForceMode.Impulse);
-        enemy.GetComponent<NavMeshAgent>().velocity = rb.velocity;
-        StartCoroutine(ResetKinematic(rb, rb.velocity));
+        // enemy.GetComponent<NavMeshAgent>().velocity = rb.velocity;
+        Vector3 vel = ((enemy.transform.forward * currentKnockBack * -1) / rb.mass) * Time.fixedDeltaTime;
+        Debug.Log("Rb velocity is " + rb.velocity);
+        Debug.Log("Rb velocity should be " + vel);
+
+        if (isRunning)
+        {
+            StopCoroutine(ResetKinematic(rb, vel));
+            isRunning = false;
+        }
+
+        StartCoroutine(ResetKinematic(rb, vel));
+        //reset the knockback
         currentKnockBack = deafaultKnockBack;
+        
     }
+
+   
 }
