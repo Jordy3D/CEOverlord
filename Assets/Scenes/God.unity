@@ -1276,7 +1276,7 @@ Prefab:
     - target: {fileID: 114140595488249380, guid: ea5da26395d88d748bde61f8f8f9cfbc,
         type: 2}
       propertyPath: numRooms
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1678707883529692, guid: ea5da26395d88d748bde61f8f8f9cfbc, type: 2}
       propertyPath: m_IsActive
@@ -1778,7 +1778,7 @@ MonoBehaviour:
   seed: 0
   tries: 0
   takenPositions: []
-  numRooms: 3
+  numRooms: 5
   roomTypes:
   - {fileID: 0}
   - {fileID: 0}

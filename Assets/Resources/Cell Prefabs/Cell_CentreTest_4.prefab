@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 4292657782338132}
   - component: {fileID: 33300514955980466}
   - component: {fileID: 23660548581596068}
+  - component: {fileID: 65147717389190622}
   m_Layer: 0
   m_Name: hard_couch_4 (1)
   m_TagString: Untagged
@@ -450,6 +451,7 @@ GameObject:
   - component: {fileID: 4449918128646416}
   - component: {fileID: 33888573100026180}
   - component: {fileID: 23642625957245504}
+  - component: {fileID: 65888637090654300}
   m_Layer: 0
   m_Name: hard_couch_4
   m_TagString: Untagged
@@ -768,7 +770,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1065040292695412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8090749, y: 25.474545, z: -20.377037}
+  m_LocalPosition: {x: -21.772215, y: 2.776454, z: -5.1976743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4075874336432802}
@@ -1423,6 +1425,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65147717389190622
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643611910738808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.073639, y: 2.810319, z: 3.1482925}
+  m_Center: {x: 0, y: 1.4051595, z: 0}
 --- !u!65 &65203288991881688
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1495,6 +1509,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65888637090654300
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907806806153960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.073639, y: 2.810319, z: 3.1482925}
+  m_Center: {x: 0, y: 1.4051595, z: 0}
 --- !u!65 &65889599594364024
 BoxCollider:
   m_ObjectHideFlags: 1
