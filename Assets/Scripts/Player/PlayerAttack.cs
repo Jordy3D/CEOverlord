@@ -54,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
                 canCombo = false;
                 comboPos = 0;
                 Debug.Log("Combo Dropped");
-                playerManager.canMove = true;
+                
                 instance = CoolDown(coolDownLimit);
                 CallCoolDown(instance);
 
@@ -73,7 +73,7 @@ public class PlayerAttack : MonoBehaviour
                     isCombo = true;
                     time = 0;
                     Debug.Log("Combo started");
-                    playerManager.canMove = false;
+                    
                 }
 
                 
@@ -94,7 +94,7 @@ public class PlayerAttack : MonoBehaviour
                     comboPos = 0;
                     Debug.Log("Combo Finished");
 
-                    playerManager.canMove = true;
+                    
                     hitbox.currentKnockBack *= 3;
                 }
                 else
@@ -108,7 +108,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && isCombo)
         {
-            playerManager.canMove = true;
+            
             Vector3 force = GetComponent<CharacterMovement>().GetMoveDir();
             GetComponent<CharacterMovement>().Dash(force);
             isCombo = false;
