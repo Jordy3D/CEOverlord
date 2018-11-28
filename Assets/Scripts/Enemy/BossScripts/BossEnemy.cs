@@ -31,6 +31,7 @@ public class BossEnemy : MonoBehaviour
 
         if (canAct && activated)
         {
+           
             //run timer to see if we can attack
             if (canAttack == false)
             {
@@ -50,6 +51,7 @@ public class BossEnemy : MonoBehaviour
                 delay = currentAttack.delay;
                 if (currentAttack == attacks[0])
                 {
+                    Debug.Log("Charging");
                     BossCharge chargeAttack = currentAttack.GetComponent<BossCharge>();
                     chargeAttack.Attack();
                     canAct = false;

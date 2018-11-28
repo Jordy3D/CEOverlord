@@ -22,6 +22,7 @@ public class BossCharge : EnemyAttack {
         moveDir = (new Vector3(transform.position.x, 0f, transform.position.z) - new Vector3(playerPos.x, 0f, playerPos.z)).normalized * -1f;
         moveDir.y = 0;
         targetPos = moveDir * 10f;
+        Debug.Log("Target Pos: " + targetPos);
         isCharging = true;
         boss.canAct = false;
     }
@@ -31,7 +32,7 @@ public class BossCharge : EnemyAttack {
         if (isCharging)
         {
 
-            gameObject.transform.position = Vector3.MoveTowards(transform.position, moveDir * 10f, chargeSpeed * Time.deltaTime);
+            boss.transform.position = Vector3.MoveTowards(transform.position, moveDir * 10f, chargeSpeed * Time.deltaTime);
             if(Vector3.Distance(transform.position, targetPos) < 1f)
             {
                 isCharging = false;
