@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - SpawnElevator
   - Projectile
+  - Ground
   layers:
   - Default
   - TransparentFX

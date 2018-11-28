@@ -41,4 +41,13 @@ public class Landing : MonoBehaviour
     {
         playerSpawn.EnablePlayer();
     }
+
+    public void SpawnBoss()
+    {
+        Vector3 bossPos = GameObject.Find("Boss").transform.position;
+        Destroy(GameObject.Find("Boss"));
+        GameObject boss = Instantiate(Resources.Load("Prefabs/Enemies/Boss") as GameObject, bossPos, Quaternion.identity);
+        boss.GetComponent<BossEnemy>().activated = true;
+
+    }
 }
