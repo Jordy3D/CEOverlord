@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossCharge : EnemyAttack
 {
@@ -13,10 +14,14 @@ public class BossCharge : EnemyAttack
     public float chargeSpeed;
     public float rayDistance = 100f;
     public LayerMask ignoreLayers;
+    public NavMeshAgent agent;
+    public Collider chargeHit;
+
 
     private void Start()
     {
         boss = GetComponent<BossEnemy>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void OnDrawGizmos()
@@ -48,7 +53,7 @@ public class BossCharge : EnemyAttack
         if (Physics.Raycast(bossPos, moveDir.normalized, out hit, rayDistance, ~ignoreLayers))
         {
             // Move the hit point away from the wall
-            targetPos = hit.point - moveDir.normalized * -2f;
+            targetPos = hit.point - moveDir.normalized * 2f;
             // Setting the Y the same as the boss
             targetPos.y = bossPos.y;
         }
@@ -62,21 +67,25 @@ public class BossCharge : EnemyAttack
 
         Debug.Log("Target Pos: " + targetPos);
         isCharging = true;
+        boss.transform.LookAt(targetPos);
         boss.canAct = false;
-        boss.GetComponent<Rigidbody>().isKinematic = false;
+        chargeHit.enabled = true;
     }
 
     private void Update()
     {
         if (isCharging)
         {
-
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, chargeSpeed * Time.deltaTime);
+            agent.speed *= 5f;
+            agent.SetDestination(targetPos);
+            //transform.position = Vector3.MoveTowards(transform.position, targetPos, chargeSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, targetPos) < 1f)
             {
                 isCharging = false;
                 boss.canAct = true;
                 boss.GetComponent<Rigidbody>().isKinematic = true;
+                agent.speed /= 5;
+                chargeHit.enabled = false;
             }
         }
     }
@@ -86,6 +95,7 @@ public class BossCharge : EnemyAttack
         if (collision.gameObject.tag == "Player")
         {
             print("Hit Player");
+            
         }
         else if (collision.gameObject.tag == "Ground")
         {
@@ -97,6 +107,7 @@ public class BossCharge : EnemyAttack
             boss.canAct = true;
             //targetPos = Vector3.zero;
             boss.GetComponent<Rigidbody>().isKinematic = true;
+            chargeHit.enabled = false;
         }
     }
 }
