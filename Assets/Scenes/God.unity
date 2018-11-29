@@ -171,6 +171,26 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1058075236291610, guid: 5f132f1720fa64144a433174ef2fab57, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993530994951154, guid: 5f132f1720fa64144a433174ef2fab57, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330225828457430, guid: 5f132f1720fa64144a433174ef2fab57, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887173984206154, guid: 5f132f1720fa64144a433174ef2fab57, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515086309804432, guid: 5f132f1720fa64144a433174ef2fab57, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f132f1720fa64144a433174ef2fab57, type: 2}
   m_IsPrefabAsset: 0
@@ -1280,7 +1300,7 @@ Prefab:
     - target: {fileID: 114140595488249380, guid: ea5da26395d88d748bde61f8f8f9cfbc,
         type: 2}
       propertyPath: numRooms
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1678707883529692, guid: ea5da26395d88d748bde61f8f8f9cfbc, type: 2}
       propertyPath: m_IsActive
@@ -1772,7 +1792,7 @@ MonoBehaviour:
   seed: 0
   tries: 0
   takenPositions: []
-  numRooms: 5
+  numRooms: 3
   roomTypes:
   - {fileID: 0}
   - {fileID: 0}

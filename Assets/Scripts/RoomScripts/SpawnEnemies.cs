@@ -38,11 +38,13 @@ public class SpawnEnemies : MonoBehaviour
             doors.SetActive(true);
             isCleared = true;
 
-            int chanceToDrop = Random.Range(0, 4);
+            int chanceToDrop = Random.Range(1, 2);
             switch (chanceToDrop)
             {
                 case 1:
                     Debug.Log("You got a drop!");
+                    GameObject clone = Instantiate(Resources.Load("Prefabs/HealthPickup"), mommy.transform) as GameObject;
+                    
                     break;
                 default:
                     Debug.Log("No drop :c");
