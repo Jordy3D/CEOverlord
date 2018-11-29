@@ -45,6 +45,14 @@ public class HitboxDamage : MonoBehaviour
             other.gameObject.GetComponent<BasicEnemy>().curHealth -= PlayerManager.damage;
             Debug.Log("Did " + PlayerManager.damage + " damage to enemy");
         }
+        else if (other.gameObject.tag == "Boss")
+        {
+            shake.cameraShake = cameraShake;
+            shake.explosion = explosion;
+            shake.StartShake(shake.shakeDuration, shake.shakeForce);
+            other.gameObject.GetComponent<BasicEnemy>().curHealth -= PlayerManager.damage;
+            Debug.Log("Did " + PlayerManager.damage + " damage to boss");
+        }
     }
 
 
@@ -88,8 +96,8 @@ public class HitboxDamage : MonoBehaviour
         StartCoroutine(ResetKinematic(rb, vel));
         //reset the knockback
         currentKnockBack = deafaultKnockBack;
-        
+
     }
 
-   
+
 }

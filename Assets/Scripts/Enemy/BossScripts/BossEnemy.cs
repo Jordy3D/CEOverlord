@@ -31,7 +31,7 @@ public class BossEnemy : MonoBehaviour
 
         if (canAct && activated)
         {
-           
+
             //run timer to see if we can attack
             if (canAttack == false)
             {
@@ -45,24 +45,28 @@ public class BossEnemy : MonoBehaviour
             else
             {
 
-                int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length));
-                currentAttack = attacks[attackIndex];
-                canAttack = false;
-                delay = currentAttack.delay;
-                if (currentAttack == attacks[0])
+                if (!belowHalf)
                 {
-                    Debug.Log("Charging");
-                    BossCharge chargeAttack = currentAttack.GetComponent<BossCharge>();
-                    chargeAttack.Attack();
-                    canAct = false;
-                }
-                else if (currentAttack == attacks[1])
-                {
-                    BossRadial radialAttack = currentAttack.GetComponent<BossRadial>();
-                    radialAttack.CallMulti(5);
-                    canAct = false;
-                }
+                    int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length-1));
+                    currentAttack = attacks[attackIndex];
+                    canAttack = false;
+                    delay = currentAttack.delay;
+                    if (currentAttack == attacks[0])
+                    {
+                        Debug.Log("Charging");
+                        BossCharge chargeAttack = currentAttack.GetComponent<BossCharge>();
+                        chargeAttack.Attack();
+                        canAct = false;
+                    }
+                    else if (currentAttack == attacks[1])
+                    {
+                        BossRadial radialAttack = currentAttack.GetComponent<BossRadial>();
+                        radialAttack.CallMulti(5);
+                        canAct = false;
+                    }
 
+                }
+                
             }
         }
     }
