@@ -13,6 +13,7 @@ public static class ItemData
         int damage = 0;
         float moveSpeed = 0;
         int health = 0;
+        float range = 0;
 
         string icon = "";
         string mesh = "";
@@ -26,7 +27,7 @@ public static class ItemData
                 name = "Apple";
                 description = "Doesn't like its consumers";
 
-                type = ItemType.Consumable;
+                type = ItemType.Quest;
 
                 damage = 0;
                 moveSpeed = 0;
@@ -41,7 +42,7 @@ public static class ItemData
                 name = "Paopu";
                 description = "For that special someone";
 
-                type = ItemType.Consumable;
+                type = ItemType.Quest;
 
                 damage = 0;
                 moveSpeed = 0;
@@ -56,7 +57,7 @@ public static class ItemData
                 name = "Questionable Gummi Worm";
                 description = "Not the most convincing fake";
 
-                type = ItemType.Consumable;
+                type = ItemType.Quest;
 
                 damage = 0;
                 moveSpeed = 0;
@@ -114,6 +115,41 @@ public static class ItemData
 
                 icon = "Stick_Icon";
                 mesh = "Stick_Mesh";
+                break;
+            #endregion
+            #endregion
+
+            #region RangeUps
+            case 300:
+                #region MagGlass
+                name = "Magnifying Glass";
+                description = "You're not as big as you think";
+
+                type = ItemType.Weapon;
+
+                damage = 0;
+                moveSpeed = 0;
+                health = 0;
+                range = 1;
+
+                icon = "MagGlass_Icon";
+                mesh = "MagGlass_Mesh";
+                break;
+            #endregion
+            case 301:
+                #region MagGlass
+                name = "Staple Gun";
+                description = "Ow, at a range";
+
+                type = ItemType.Weapon;
+
+                damage = 0;
+                moveSpeed = 0;
+                health = 0;
+                range = 2;
+
+                icon = "StapleGun_Icon";
+                mesh = "StapleGun_Mesh";
                 break;
             #endregion
             #endregion
@@ -245,7 +281,7 @@ public static class ItemData
                 name = "Old Gloves";
                 description = "Fits like one";
 
-                type = ItemType.Consumable;
+                type = ItemType.Glove;
                 
                 icon = "Apple_Icon";
                 mesh = "Apple_Mesh";
@@ -259,7 +295,7 @@ public static class ItemData
                 name = "Lead Gloves";
                 description = "Heavy Metal!";
 
-                type = ItemType.Consumable;
+                type = ItemType.Glove;
 
                 icon = "Apple_Icon";
                 mesh = "Apple_Mesh";
@@ -281,6 +317,55 @@ public static class ItemData
 
             Type = type,
                         
+            //Icon = Resources.Load("Icons/" + icon) as Texture2D,
+            Mesh = mesh
+        };
+
+        return temp;
+    }
+
+    public static Item CreateDrop(int ItemID)
+    {
+        int id = ItemID;
+        string name = "";
+
+        ItemType type = ItemType.Consumable;
+
+        int healAmount = 0;
+
+        string icon = "";
+        string mesh = "";
+
+        switch (ItemID)
+        {
+            #region Pickups 0-99
+            case 0:
+                #region Heart
+                name = "Heal";
+
+                type = ItemType.Consumable;
+
+                healAmount = 1;
+
+                icon = "Heal_Icon";
+                mesh = "Heal_Mesh";
+                break;
+            #endregion
+            
+            #endregion
+            default:
+                break;
+        }
+
+        Item temp = new Item
+        {
+            ID = ItemID,
+            Name = name,
+
+            Type = type,
+
+            HealAmount = healAmount,
+
             //Icon = Resources.Load("Icons/" + icon) as Texture2D,
             Mesh = mesh
         };

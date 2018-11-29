@@ -45,9 +45,18 @@ public class ItemPickup : MonoBehaviour
         {
             playerInv.inv.Add(ItemData.CreateItem(itemID));
             stats.health += ItemData.CreateItem(itemID).Health;
-            stats.damage += ItemData.CreateItem(itemID).Damage;
             
+            stats.damage += ItemData.CreateItem(itemID).Damage;
+            stats.attackRange += ItemData.CreateItem(itemID).Range;
+
+            if (ItemData.CreateDrop(itemID).Type == ItemType.Consumable)
+            {
+                other.GetComponent<PlayerManager>().ChangeHealth(ItemData.CreateDrop(itemID).HealAmount);
+            }
+
             player.UpdateStats();
+
+            other.GetComponent<PlayerManager>().ChangeHealth(ItemData.CreateItem(itemID).Health);
 
             Destroy(gameObject);
         }
