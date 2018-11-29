@@ -62,8 +62,11 @@ public class HitboxDamage : MonoBehaviour
         //}
         isRunning = true;
         yield return new WaitForSeconds(0.2f);
-        rb.isKinematic = true;
-        rb.GetComponent<BasicEnemy>().canAct = true;
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.GetComponent<BasicEnemy>().canAct = true;
+        }
         isRunning = false;
 
     }
