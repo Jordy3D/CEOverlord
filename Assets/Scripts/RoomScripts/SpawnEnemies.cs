@@ -18,6 +18,7 @@ public class SpawnEnemies : MonoBehaviour
     public GameObject[] enemyPool;
 
     bool hasSpawned = false;
+    bool isCleared = false;
     // Use this for initialization
     void Start()
     {
@@ -32,9 +33,21 @@ public class SpawnEnemies : MonoBehaviour
 
     private void Update()
     {
-        if (enemyContainer.transform.childCount == 0 && hasSpawned)
+        if (enemyContainer.transform.childCount == 0 && hasSpawned && isCleared == false)
         {
             doors.SetActive(true);
+            isCleared = true;
+
+            int chanceToDrop = Random.Range(0, 4);
+            switch (chanceToDrop)
+            {
+                case 1:
+                    Debug.Log("You got a drop!");
+                    break;
+                default:
+                    Debug.Log("No drop :c");
+                    break;
+            }
         }
     }
 

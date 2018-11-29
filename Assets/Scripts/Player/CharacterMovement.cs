@@ -18,9 +18,7 @@ public class CharacterMovement : MonoBehaviour
     public PlayerStats stats;
     public Vector3 lookDir;
     PlayerManager playerManager;
-
     
-
     public bool isDashing = false;
     
     public void Start()
@@ -46,6 +44,22 @@ public class CharacterMovement : MonoBehaviour
             {
                 isDashing = false;
                 dashTime = 0;
+            }
+        }
+
+        if (playerManager.canMove == false && isDashing == false)
+        {
+            float forcedFixTime = 0;
+            float forceFixMax = 10f;
+            if (forcedFixTime <= forceFixMax)
+            {
+                Debug.Log("Forcing a fix: " + forcedFixTime);
+                forcedFixTime += Time.deltaTime;
+                if (forcedFixTime >= forceFixMax)
+                {
+                    playerManager.canMove = true;
+                    forcedFixTime = 0;
+                }
             }
         }
 
