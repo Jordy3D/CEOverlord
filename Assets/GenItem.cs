@@ -9,16 +9,19 @@ public class GenItem : MonoBehaviour
     int itemNumber;
     public ItemPickup roomItem;
 
+    public bool isSpawned;
 
     private void Start()
     {
+        isSpawned = false;
         itemNums = GameObject.FindGameObjectWithTag("ItemMaster").GetComponent<ItemArrayMaster>().itemNums;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "Player" && isSpawned == false)
         {
+            isSpawned = true;
             GenerateItem();
         }
     }

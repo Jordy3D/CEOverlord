@@ -54,14 +54,17 @@ public class BasicEnemy : MonoBehaviour
         {
             if (enemyAttack.GetComponent<CultistMelee>())
             {
-                agentTarget = player.position;
-                if (Vector3.Distance(transform.position, player.position) < 2f)
+                if (player != null)
                 {
-                    //will rig enemy attack with a delay before punching to warn player
-                    if (canFire)
+                    agentTarget = player.position;
+                    if (Vector3.Distance(transform.position, player.position) < 2f)
                     {
-                        enemyAttack.Attack();
-                        canFire = false;
+                        //will rig enemy attack with a delay before punching to warn player
+                        if (canFire)
+                        {
+                            enemyAttack.Attack();
+                            canFire = false;
+                        }
                     }
                 }
             }

@@ -24,12 +24,6 @@ public class Landing : MonoBehaviour
         explosion = this.gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnLand()
     {
         shake.cameraShake = cameraShake;

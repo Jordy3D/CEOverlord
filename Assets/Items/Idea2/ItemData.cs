@@ -253,6 +253,8 @@ public static class ItemData
 
             Health = health,
 
+            Range = range,
+
             Icon = Resources.Load("Icons/" + icon) as Texture2D,
             Mesh = mesh
         };
