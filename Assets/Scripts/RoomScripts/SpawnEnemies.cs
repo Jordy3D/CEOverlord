@@ -43,7 +43,9 @@ public class SpawnEnemies : MonoBehaviour
             {
                 case 1:
                     Debug.Log("You got a drop!");
+                    //Vector3 dropLocation = new Vector3(mommy.transform.position.x, mommy.transform.position.y + .5f, mommy.transform.position.z);
                     GameObject clone = Instantiate(Resources.Load("Prefabs/HealthPickup"), mommy.transform) as GameObject;
+                    clone.GetComponent<DropPickup>().itemID = 0;
                     
                     break;
                 default:
