@@ -10,7 +10,7 @@ public class BossEnemy : MonoBehaviour
     public Transform player;
     public EnemyAttack[] attacks;
     public EnemyAttack currentAttack;
-    public float health;
+    public float health, curHealth;
     public float timer;
     public float delay;
     bool canAttack = true;
@@ -23,6 +23,7 @@ public class BossEnemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         attacks = GetComponents<EnemyAttack>();
+        curHealth = health;
     }
 
     // Update is called once per frame

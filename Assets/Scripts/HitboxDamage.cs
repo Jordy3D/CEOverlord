@@ -50,7 +50,7 @@ public class HitboxDamage : MonoBehaviour
             shake.cameraShake = cameraShake;
             shake.explosion = explosion;
             shake.StartShake(shake.shakeDuration, shake.shakeForce);
-            other.gameObject.GetComponent<BasicEnemy>().curHealth -= PlayerManager.damage;
+            other.gameObject.GetComponent<BossEnemy>().curHealth -= PlayerManager.damage;
             Debug.Log("Did " + PlayerManager.damage + " damage to boss");
         }
     }
