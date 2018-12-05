@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BossEnemy : MonoBehaviour
 {
@@ -17,6 +18,20 @@ public class BossEnemy : MonoBehaviour
     public bool canAct, activated;
     public bool belowHalf;
 
+    public GameObject healthBarHolder;
+    public Image healthBar;
+
+    public GameObject nextFloorObject;
+
+    public GameObject bossFloor;
+    public GameObject bossGround;
+
+    private void Awake()
+    {
+        healthBarHolder = null;
+        healthBar = null;
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -24,6 +39,15 @@ public class BossEnemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         attacks = GetComponents<EnemyAttack>();
         curHealth = health;
+
+        bossFloor = GameObject.Find("Cell_Boss(Clone)");
+        bossGround = bossFloor.transform.Find("Ground").gameObject;
+
+        healthBar = bossGround.GetComponent<BossTrigger>().healthBar;
+        healthBarHolder = bossGround.GetComponent<BossTrigger>().healthBarHolder;
+
+        healthBar.fillAmount = health;
+        healthBarHolder.SetActive(true);
     }
 
     // Update is called once per frame
@@ -48,7 +72,7 @@ public class BossEnemy : MonoBehaviour
 
                 if (!belowHalf)
                 {
-                    int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length-1));
+                    int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length - 1));
                     currentAttack = attacks[attackIndex];
                     canAttack = false;
                     delay = currentAttack.delay;
@@ -67,9 +91,42 @@ public class BossEnemy : MonoBehaviour
                     }
 
                 }
-                
+                else
+                {
+                    int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length - 1));
+                    currentAttack = attacks[attackIndex];
+                    canAttack = false;
+                    delay = currentAttack.delay / 2;
+                    if (currentAttack == attacks[0])
+                    {
+                        Debug.Log("Charging");
+                        BossCharge chargeAttack = currentAttack.GetComponent<BossCharge>();
+                        chargeAttack.Attack();
+                        canAct = false;
+                    }
+                    else if (currentAttack == attacks[1])
+                    {
+                        BossRadial radialAttack = currentAttack.GetComponent<BossRadial>();
+                        radialAttack.CallMulti(5);
+                        canAct = false;
+                    }
+                }
+
             }
         }
+
+        if (curHealth <= health / 2)
+        {
+            belowHalf = true;
+        }
+
+        
+    }
+    public void Death()
+    {
+        Destroy(this.gameObject);
+
+        bossGround.GetComponent<BossTrigger>().nextFloorObject.SetActive(true);
     }
 
 

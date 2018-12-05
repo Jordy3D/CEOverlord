@@ -13,9 +13,11 @@ public class BossCharge : EnemyAttack
     BossEnemy boss;
     public float chargeSpeed;
     public float rayDistance = 100f;
+    public float speedModifier = 7f;
     public LayerMask ignoreLayers;
     public NavMeshAgent agent;
     public Collider chargeHit;
+    public Material[] mats;
 
 
     private void Start()
@@ -66,17 +68,16 @@ public class BossCharge : EnemyAttack
         //}
 
         Debug.Log("Target Pos: " + targetPos);
-        isCharging = true;
         boss.transform.LookAt(targetPos);
         boss.canAct = false;
-        chargeHit.enabled = true;
+        StartCoroutine(TelegraphCharge());
     }
 
     private void Update()
     {
         if (isCharging)
         {
-            agent.speed *= 5f;
+            agent.speed *= speedModifier;
             agent.SetDestination(targetPos);
             //transform.position = Vector3.MoveTowards(transform.position, targetPos, chargeSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, targetPos) < 1f)
@@ -84,8 +85,9 @@ public class BossCharge : EnemyAttack
                 isCharging = false;
                 boss.canAct = true;
                 boss.GetComponent<Rigidbody>().isKinematic = true;
-                agent.speed /= 5;
+                agent.speed /= speedModifier;
                 chargeHit.enabled = false;
+                GetComponent<Renderer>().material = mats[0];
             }
         }
     }
@@ -109,5 +111,29 @@ public class BossCharge : EnemyAttack
             boss.GetComponent<Rigidbody>().isKinematic = true;
             chargeHit.enabled = false;
         }
+    }
+
+    IEnumerator TelegraphCharge()
+    {
+        float time = Time.time;
+        bool flash = false;
+        while (Time.time < time + 0.5f)
+        {
+            if (flash)
+            {
+                GetComponent<Renderer>().material = mats[1];
+                flash = !flash;
+                yield return new WaitForSeconds(0.2f);
+            }
+            else
+            {
+                GetComponent<Renderer>().material = mats[0];
+                flash = !flash;
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        GetComponent<Renderer>().material = mats[1];
+        isCharging = true;
+        chargeHit.enabled = true;
     }
 }

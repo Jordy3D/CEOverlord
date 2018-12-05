@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1663126738281676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.9153333, y: 11.674648, z: -21.554525}
+  m_LocalPosition: {x: -9.007055, y: 13.787413, z: 7.5994644}
   m_LocalScale: {x: 2.532, y: 3.4204793, z: 1.3955624}
   m_Children:
   - {fileID: 4365618967924516}
@@ -179,11 +179,15 @@ MonoBehaviour:
   isCharging: 0
   chargeSpeed: 5
   rayDistance: 100
+  speedModifier: 7
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 256
   agent: {fileID: 0}
   chargeHit: {fileID: 65911114244380182}
+  mats:
+  - {fileID: 2100000, guid: ce6ae8ee4a7fb324888048d743dfbdd4, type: 2}
+  - {fileID: 2100000, guid: 1cd0d27edbca6804796d6bad130baa91, type: 2}
 --- !u!114 &114232976551197982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,6 +248,9 @@ MonoBehaviour:
   radius: 1
   numProjectiles: 10
   boss: {fileID: 0}
+  mats:
+  - {fileID: 2100000, guid: ce6ae8ee4a7fb324888048d743dfbdd4, type: 2}
+  - {fileID: 2100000, guid: 1cd0d27edbca6804796d6bad130baa91, type: 2}
 --- !u!114 &114974630500371744
 MonoBehaviour:
   m_ObjectHideFlags: 1
