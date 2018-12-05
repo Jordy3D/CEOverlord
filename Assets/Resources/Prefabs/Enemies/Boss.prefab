@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawn: {fileID: 0}
   projectile: {fileID: 0}
-  delay: 3
+  delay: 1.2
   state: 0
   playerPos: {x: 0, y: 0, z: 0}
   isCharging: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawn: {fileID: 0}
   projectile: {fileID: 1578936306318158, guid: 5a76e8b0408ff8e4db22ea47fac2dfdb, type: 2}
-  delay: 3
+  delay: 2
   state: 0
   radius: 1
   numProjectiles: 10

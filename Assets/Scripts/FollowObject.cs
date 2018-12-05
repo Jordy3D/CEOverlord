@@ -15,13 +15,12 @@ public class FollowObject : MonoBehaviour
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
 
-        target = transform.parent.gameObject.transform;
-
         if (toCamera)
         {
-            //Vector3 targetPostition = new Vector3(camera.position.x, camera.position.y, camera.position.z);
-            transform.LookAt(camera);
+            transform.SetParent(null, false);
 
+            Vector3 targetPostition = new Vector3(camera.position.x, this.transform.position.y, camera.position.z);
+            transform.LookAt(targetPostition);
         }
     }
 
@@ -42,5 +41,6 @@ public class FollowObject : MonoBehaviour
         {
             GameObject.Destroy(this.gameObject);
         }
-            }
+        
+    }
 }

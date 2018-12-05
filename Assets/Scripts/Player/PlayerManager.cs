@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     CharacterMovement movementStats;
     DisplayStats display;
     public GameObject dontDestroy;
+
+    public GameObject endScreen;
     #endregion
 
     // Use this for initialization
@@ -34,6 +36,8 @@ public class PlayerManager : MonoBehaviour
         stats = GetComponent<PlayerStats>();
         movementStats = GetComponent<CharacterMovement>();
         display = GameObject.Find("GamePanel").GetComponent<DisplayStats>();
+        endScreen = GameObject.Find("Continue");
+        endScreen.SetActive(false);
 
         UpdateStats();
         health = maxHealth;
@@ -108,7 +112,7 @@ public class PlayerManager : MonoBehaviour
 
         if (health == 0)
         {
-            EndGame();
+            Die();
         }
     }
 
@@ -137,11 +141,23 @@ public class PlayerManager : MonoBehaviour
         CheckHealth();
     }
 
-    void EndGame()
+    public void EndGame()
     {
+        Time.timeScale = 1;
         dontDestroy.GetComponent<PermanentObject>().enabled = false;
         Destroy(dontDestroy);
         SceneManager.LoadScene("God");
+    }
+
+    void Die()
+    {
+        Time.timeScale = 0;
+        endScreen.SetActive(true);
+    }
+
+    public void FuckOff()
+    {
+        Application.Quit();
     }
 
 }
