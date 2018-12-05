@@ -12,6 +12,7 @@ TagManager:
   - SpawnElevator
   - Projectile
   - Ground
+  - Boss
   layers:
   - Default
   - TransparentFX

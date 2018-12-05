@@ -53,7 +53,7 @@ public class BossRadial : EnemyAttack {
 
         for (int i = 0; i < numProjectiles; i++)
         {
-            Debug.Log(currentAngle);
+            //Debug.Log(currentAngle);
             float x = Mathf.Sin(currentAngle * Mathf.Deg2Rad);
             float y = Mathf.Cos(currentAngle * Mathf.Deg2Rad);
             float dirX = x * radius;

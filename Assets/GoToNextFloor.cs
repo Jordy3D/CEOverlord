@@ -24,6 +24,8 @@ public class GoToNextFloor : MonoBehaviour
             Debug.Log("Going to " + level.currentLevel);
             if (SceneManager.GetActiveScene().name == "God")
             {
+                Camera.main.transform.position = new Vector3(0, Camera.main.transform.position.y, -2.1f);
+
                 SceneManager.LoadScene("God");
             }
         }

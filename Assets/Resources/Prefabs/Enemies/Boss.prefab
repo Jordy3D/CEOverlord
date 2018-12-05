@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 114232976551197982}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,11 +218,14 @@ MonoBehaviour:
   - {fileID: 0}
   currentAttack: {fileID: 0}
   health: 50
+  curHealth: 0
   timer: 0
   delay: 0
   canAct: 1
   activated: 0
   belowHalf: 0
+  healthBarHolder: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &114523310070969236
 MonoBehaviour:
   m_ObjectHideFlags: 1

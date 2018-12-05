@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Landing : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Landing : MonoBehaviour
 
         shake = GetComponent<TriggerShake>();
         explosion = this.gameObject;
+
     }
 
     public void OnLand()
@@ -42,6 +44,5 @@ public class Landing : MonoBehaviour
         Destroy(GameObject.Find("Boss"));
         GameObject boss = Instantiate(Resources.Load("Prefabs/Enemies/Boss") as GameObject, bossPos, Quaternion.identity);
         boss.GetComponent<BossEnemy>().activated = true;
-
     }
 }
