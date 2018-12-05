@@ -96,6 +96,7 @@ public class BossCharge : EnemyAttack
     {
         if (collision.gameObject.tag == "Player")
         {
+            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
             print("Hit Player");
             
         }

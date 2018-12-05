@@ -77,7 +77,7 @@ public static class ItemData
 
                 type = ItemType.Weapon;
 
-                damage = 5;
+                damage = 2;
                 moveSpeed = 0;
                 health = 0;
 
@@ -93,7 +93,7 @@ public static class ItemData
 
                 type = ItemType.Weapon;
 
-                damage = 25;
+                damage = 3;
                 moveSpeed = 0;
                 health = 0;
 
@@ -109,7 +109,7 @@ public static class ItemData
 
                 type = ItemType.Weapon;
 
-                damage = 0;
+                damage = 1;
                 moveSpeed = 0;
                 health = 0;
 

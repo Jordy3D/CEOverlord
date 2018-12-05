@@ -43,7 +43,7 @@ public class HitboxDamage : MonoBehaviour
             shake.StartShake(shake.shakeDuration, shake.shakeForce);
             KnockBack(currentKnockBack, other.gameObject);
             other.gameObject.GetComponent<BasicEnemy>().curHealth -= PlayerManager.damage;
-            Debug.Log("Did " + PlayerManager.damage + " damage to enemy");
+            Debug.Log("Did " + PlayerManager.damage + " damage to " + other.gameObject.name);
         }
         else if (other.gameObject.tag == "Boss")
         {

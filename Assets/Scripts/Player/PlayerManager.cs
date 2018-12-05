@@ -7,7 +7,8 @@ public class PlayerManager : MonoBehaviour
 {
 
     #region Vars
-    public static float damage;
+    [SerializeField] public static float damage;
+    public float fuck;
 
     public float health;
     public float maxHealth;
@@ -41,6 +42,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fuck = damage;
         //check health and stamina values
         CheckStamina();
         CheckHealth();
@@ -130,6 +132,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ChangeHealth(float value)
     {
+        Debug.Log("Removing " + value + " health");
         health += value;
         CheckHealth();
     }

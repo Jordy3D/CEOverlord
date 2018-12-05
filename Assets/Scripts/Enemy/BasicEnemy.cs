@@ -19,6 +19,10 @@ public class BasicEnemy : MonoBehaviour
     public float curHealth;
     public bool canAct = true;
 
+    [Header("Ranged Cultist")]
+    public float range;
+    public float fleeDistance;
+
 
     public Image healthBar;
 
@@ -70,12 +74,24 @@ public class BasicEnemy : MonoBehaviour
             }
             else if (enemyAttack.GetComponent<CultistAttack>())
             {
-                Vector3 vel = player.position - transform.position;
-                vel.Normalize();
-                Vector3 moveDir = vel * -1;
-                agentTarget = transform.position + moveDir * Time.deltaTime;
+                if (player)
+                {
+                    Vector3 fleeTarget = transform.position + ((transform.position - player.position) * fleeDistance);
 
-                //transform.rotation = Quaternion.LookRotation(new Vector3(player.position.x, 0f, player.position.z), Vector3.up);
+                    float distance = Vector3.Distance(transform.position, player.position);
+
+                    if (distance < range)
+                    {
+                        agentTarget = fleeTarget;
+                    }
+                    else
+                    {
+                        agentTarget = transform.position;
+                    }
+
+                    transform.LookAt(player.position);
+                }
+
                 if (canFire)
                 {
                     enemyAttack.Attack();

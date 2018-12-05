@@ -54,6 +54,13 @@ public class BossEnemy : MonoBehaviour
     void Update()
     {
 
+        healthBar.fillAmount = curHealth / health;
+
+        if (curHealth <= 0)
+        {
+            Death();
+        }
+
         if (canAct && activated)
         {
 

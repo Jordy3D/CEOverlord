@@ -51,6 +51,17 @@ public class MapGen : MonoBehaviour
             Random.seed = seed;
         }
 
+        seed = Random.seed;
+
+        int intValue = seed;
+        // Convert integer 182 as a hex in a string variable
+        string hexValue = intValue.ToString("X");
+        // Convert the hex string back to the number
+        //int intAgain = int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);
+
+        Debug.Log(Random.seed.ToString());
+        Debug.Log(hexValue);
+
         if (numRooms<3)
         {
             numRooms = 3;

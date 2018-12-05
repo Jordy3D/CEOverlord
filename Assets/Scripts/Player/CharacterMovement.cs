@@ -20,7 +20,9 @@ public class CharacterMovement : MonoBehaviour
     PlayerManager playerManager;
     
     public bool isDashing = false;
-    
+
+    float forcedFixTime = 0f;
+
     public void Start()
     {
         //gets and attaches the rigidbody
@@ -49,8 +51,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (playerManager.canMove == false && isDashing == false)
         {
-            float forcedFixTime = 0;
-            float forceFixMax = 10f;
+            float forceFixMax = 4f;
             if (forcedFixTime <= forceFixMax)
             {
                 Debug.Log("Forcing a fix: " + forcedFixTime);

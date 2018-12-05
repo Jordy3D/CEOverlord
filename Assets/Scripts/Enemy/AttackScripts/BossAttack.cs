@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossAttack : EnemyAttack{
-
+public class BossAttack : EnemyAttack
+{
     public int numProjectiles;
     public float radius;
-    
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         state = Behaviour.Sentinal;
-	}
-	
-	
+    }
 
     public override void Attack()
     {
@@ -35,9 +33,9 @@ public class BossAttack : EnemyAttack{
             EnemyProjectile newProjectile = clone.GetComponent<EnemyProjectile>();
 
             newProjectile.Fire(shotDir.normalized);
-            
+
             currentAngle += angleStep;
-            
+
         }
         Debug.Log("Reached nums - 1");
     }
