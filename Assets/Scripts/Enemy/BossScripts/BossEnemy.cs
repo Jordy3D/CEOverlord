@@ -48,7 +48,7 @@ public class BossEnemy : MonoBehaviour
 
                 if (!belowHalf)
                 {
-                    int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length-1));
+                    int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length - 1));
                     currentAttack = attacks[attackIndex];
                     canAttack = false;
                     delay = currentAttack.delay;
@@ -67,8 +67,33 @@ public class BossEnemy : MonoBehaviour
                     }
 
                 }
-                
+                else
+                {
+                    int attackIndex = Mathf.RoundToInt(Random.Range(0, attacks.Length - 1));
+                    currentAttack = attacks[attackIndex];
+                    canAttack = false;
+                    delay = currentAttack.delay / 2;
+                    if (currentAttack == attacks[0])
+                    {
+                        Debug.Log("Charging");
+                        BossCharge chargeAttack = currentAttack.GetComponent<BossCharge>();
+                        chargeAttack.Attack();
+                        canAct = false;
+                    }
+                    else if (currentAttack == attacks[1])
+                    {
+                        BossRadial radialAttack = currentAttack.GetComponent<BossRadial>();
+                        radialAttack.CallMulti(5);
+                        canAct = false;
+                    }
+                }
+
             }
+        }
+
+        if (curHealth <= health / 2)
+        {
+            belowHalf = true;
         }
     }
 

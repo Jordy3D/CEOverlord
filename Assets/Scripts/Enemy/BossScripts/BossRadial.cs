@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossRadial : EnemyAttack {
+public class BossRadial : EnemyAttack
+{
 
     public float radius;
     public int numProjectiles;
     public BossEnemy boss;
+    public Material[] mats;
+
 
     private void Start()
     {
         boss = GetComponent<BossEnemy>();
-        
-        
+
+
     }
     public override void Attack()
     {
@@ -30,7 +33,7 @@ public class BossRadial : EnemyAttack {
             float dirX = x * radius;
             float dirY = y * radius;
             Vector3 shotDir = new Vector3(dirX, 0f, dirY);
-            
+
 
             GameObject clone = Instantiate(projectile, startPoint, Quaternion.identity);
             EnemyProjectile newProjectile = clone.GetComponent<EnemyProjectile>();
@@ -59,7 +62,7 @@ public class BossRadial : EnemyAttack {
             float dirX = x * radius;
             float dirY = y * radius;
             Vector3 shotDir = new Vector3(dirX, 0f, dirY);
-            
+
 
             GameObject clone = Instantiate(projectile, startPoint, Quaternion.identity);
             EnemyProjectile newProjectile = clone.GetComponent<EnemyProjectile>();
@@ -72,22 +75,47 @@ public class BossRadial : EnemyAttack {
         Debug.Log("Reached nums - 1");
     }
 
-    IEnumerator radialMulti(int repeats, float shift)
+    IEnumerator RadialMulti(int repeats, float shift)
     {
         float angleShift = 0f;
         for (int i = 0; i < repeats; i++)
         {
             AttackMulti(angleShift);
             angleShift += shift;
-            yield return new WaitForSeconds(0.7f); 
+            yield return new WaitForSeconds(0.7f);
         }
-        
+
         boss.canAct = true;
+    }
+
+    IEnumerator TelegraphRadial(int repeats)
+    {
+        
+        
+        float time = Time.time;
+        bool flash = false;
+        while (Time.time < time + 0.5f)
+        {
+            if (flash)
+            {
+               GetComponent<Renderer>().material = mats[1];
+                flash = !flash;
+                yield return new WaitForSeconds(0.05f);
+            }
+            else
+            {
+                GetComponent<Renderer>().material = mats[0];
+                flash = !flash;
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        GetComponent<Renderer>().material = mats[0];
+        StartCoroutine(RadialMulti(repeats, 15f));
     }
 
     public void CallMulti(int repeats)
     {
-        
-        StartCoroutine(radialMulti(repeats, 15f));
+
+        StartCoroutine(TelegraphRadial(repeats));
     }
 }
